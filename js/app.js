@@ -1504,313 +1504,186 @@ function finishDiag() {
 
 function quiz() {
 
-  const total =
-    Array.isArray(T9.questions)
-      ? T9.questions.length
-      : 0;
-
-  const essays =
-    Array.isArray(T9.essayQuestions)
-      ? T9.essayQuestions.length
-      : 0;
+  const lessons = curriculumLessons();
+  const attempts = Array.isArray(S.history) ? S.history.length : 0;
 
   return `
 
   <div class="panel">
 
     <div class="section-head">
-
       <div>
-
-        <h2>
-          📝 LUYỆN TẬP TIN HỌC 9
-        </h2>
-
+        <h2>📝 LUYỆN TẬP THEO TỪNG BÀI</h2>
         <p class="muted">
-          Bài luyện tập tổng hợp giúp học sinh tự kiểm tra,
-          nhận phản hồi và điều chỉnh lộ trình học tập.
+          Mỗi bài có <b>20 câu trắc nghiệm + 03 câu tự luận</b>.
+          Em chọn đúng bài đã học để luyện tập và nhận phản hồi.
         </p>
-
       </div>
-
     </div>
 
     <div class="cards">
-
       <div class="card">
-        📝 Trắc nghiệm
-        <div class="num">
-          ${total}
-        </div>
+        📝 Trắc nghiệm / bài
+        <div class="num">20</div>
       </div>
-
       <div class="card">
-        ✍️ Tự luận
-        <div class="num">
-          ${essays}
-        </div>
+        ✍️ Tự luận / bài
+        <div class="num">03</div>
       </div>
-
       <div class="card">
         📚 Bài học
-        <div class="num">
-          ${lessonTotal()}
-        </div>
+        <div class="num">${lessons.length}</div>
       </div>
-
       <div class="card">
         📊 Lượt làm
-        <div class="num">
-          ${S.history.length}
-        </div>
+        <div class="num">${attempts}</div>
       </div>
-
     </div>
 
     <div class="callout blue">
+      <b>📌 Cấu trúc mỗi bài luyện tập</b>
+      <p><b>Phần A:</b> 20 câu trắc nghiệm, hệ thống tự chấm.</p>
+      <p><b>Phần B:</b> 03 câu tự luận, lưu câu trả lời để giáo viên xem và đánh giá.</p>
+      <p><b>Nguyên tắc:</b> câu hỏi được lấy đúng theo bài em chọn, không trộn câu của bài khác.</p>
+    </div>
 
-      <b>
-        📌 Cấu trúc bài luyện tập
-      </b>
+    <h3>📚 Chọn bài để luyện tập</h3>
 
-      <p>
-        <b>Phần A:</b>
-        ${total} câu trắc nghiệm, hệ thống tự chấm.
-      </p>
-
-      <p>
-        <b>Phần B:</b>
-        ${essays} câu tự luận, lưu câu trả lời để giáo viên xem và đánh giá.
-      </p>
-
+    <div id="lessonQuizList">
+      ${lessons.map(l => `
+        <div class="lesson">
+          <div>
+            <b>${l.code} • ${esc(l.title)}</b>
+            <div class="muted" style="margin-top:6px">
+              ${l.branch ? `Nhánh ${l.branch} • ` : ""}20 trắc nghiệm + 03 tự luận
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn primary"
+            onclick="startQuiz('${l.id}')">
+            📝 Luyện tập bài này
+          </button>
+        </div>
+      `).join("")}
     </div>
 
     <div class="toolbar">
-
-      <button
-        class="btn primary"
-        onclick="startQuiz()">
-
-        🚀 Bắt đầu làm bài
-
-      </button>
-
-      <button
-        class="btn"
-        onclick="view('lessons')">
-
+      <button type="button" class="btn" onclick="view('lessons')">
         📚 Về bài học
-
       </button>
-
     </div>
 
-    <div
-      id="quizArea"
-      style="margin-top:18px">
-
-    </div>
+    <div id="quizArea" style="margin-top:18px"></div>
 
   </div>
-
   `;
 }
 
 function startQuiz(sourceLessonId) {
 
-  const qs =
-    Array.isArray(T9.questions)
-      ? T9.questions.slice(0, 20)
-      : [];
+  const lesson = T9.lessons.find(
+    l => String(l.id) === String(sourceLessonId)
+  );
 
-  const essays =
-    Array.isArray(T9.essayQuestions)
-      ? T9.essayQuestions.slice(0, 3)
-      : [];
+  if (!lesson) {
+    view("quiz");
+    return;
+  }
 
-  if (qs.length < 20) {
+  // Lấy đúng 20 câu và 03 câu tự luận của CHÍNH bài đang chọn.
+  const qs = Array.isArray(T9.questions)
+    ? T9.questions
+        .filter(q => String(q.lesson) === String(lesson.id))
+        .slice(0, 20)
+    : [];
 
-    const area = $("quizArea");
+  const essays = Array.isArray(T9.essayQuestions)
+    ? T9.essayQuestions
+        .filter(q => String(q.lesson) === String(lesson.id))
+        .slice(0, 3)
+    : [];
 
-    if (area) {
+  const area = $("quizArea");
+  if (!area) return;
 
-      area.innerHTML = `
-
+  if (qs.length !== 20 || essays.length !== 3) {
+    area.innerHTML = `
       <div class="callout orange">
-
-        ⚠️ Ngân hàng câu hỏi chưa đủ 20 câu.
-        Hiện có ${qs.length} câu.
-
+        ⚠️ Dữ liệu luyện tập của <b>${esc(lesson.code)} – ${esc(lesson.title)}</b>
+        chưa đủ. Hiện có <b>${qs.length}/20</b> câu trắc nghiệm và
+        <b>${essays.length}/03</b> câu tự luận.
       </div>
-      `;
-
-    }
-
+    `;
     return;
   }
 
   window._quiz = {
-
-    id: "tong-hop",
-
-    sourceLessonId:
-      sourceLessonId || null,
-
-    qs: qs,
-
-    essays: essays,
-
+    id: `bai-${lesson.id}`,
+    sourceLessonId: String(lesson.id),
+    qs,
+    essays,
     ans: [],
-
     submitted: false
-
   };
-
-  const source =
-    sourceLessonId
-      ? T9.lessons.find(
-          l => l.id === sourceLessonId
-        )
-      : null;
-
-  const sourceText =
-    source
-      ? `Luyện tập sau bài ${source.code} – ${source.title}. Bộ đề gồm 20 câu tổng hợp và 03 câu tự luận.`
-      : "Bộ đề tổng hợp toàn chương trình gồm 20 câu trắc nghiệm và 03 câu tự luận.";
-
-  const area = $("quizArea");
-
-  if (!area) return;
 
   area.innerHTML = `
 
-  <div class="callout blue">
-
-    <b>
-      📌 Hướng dẫn làm bài
-    </b>
-
-    <p>
-      ${esc(sourceText)}
-    </p>
-
-    <p>
-      Mỗi câu trắc nghiệm có một đáp án đúng.
-      Em có thể chọn lại trước khi nộp.
-    </p>
-
+  <div class="callout green">
+    <b>📚 ${esc(lesson.code)} – ${esc(lesson.title)}</b>
+    <p>Bộ luyện tập riêng của bài này: <b>20 câu trắc nghiệm + 03 câu tự luận</b>.</p>
+    <p>Câu hỏi không lấy từ các bài khác.</p>
   </div>
 
   <div class="panel">
-
-    <h2>
-      📝 PHẦN A. 20 CÂU TRẮC NGHIỆM
-    </h2>
+    <h2>📝 PHẦN A. 20 CÂU TRẮC NGHIỆM</h2>
 
     ${qs.map((q, i) => `
-
       <div class="quiz-q">
-
-        <p>
-          <b>
-            Câu ${i + 1}.
-          </b>
-
-          ${esc(q.text)}
-        </p>
-
+        <p><b>Câu ${i + 1}.</b> ${esc(q.text)}</p>
         ${q.opts.map((o, j) => `
-
           <button
             type="button"
             class="option"
             data-quiz-q="${i}"
             data-quiz-a="${j}"
             onclick="qans(${i},${j},this)">
-
-            ${String.fromCharCode(65 + j)}.
-            ${esc(o)}
-
+            ${String.fromCharCode(65 + j)}. ${esc(o)}
           </button>
-
         `).join("")}
-
       </div>
-
     `).join("")}
-
   </div>
 
   <div class="panel">
-
-    <h2>
-      ✍️ PHẦN B. 03 CÂU TỰ LUẬN
-    </h2>
+    <h2>✍️ PHẦN B. 03 CÂU TỰ LUẬN</h2>
 
     <div class="callout orange">
-
-      <b>
-        📌 Lưu ý:
-      </b>
-
-      <span>
-        Câu tự luận không tự chấm nội dung.
-        Câu trả lời được lưu trên thiết bị để giáo viên xem và đánh giá.
-      </span>
-
+      <b>📌 Lưu ý:</b>
+      Câu tự luận không tự chấm nội dung. Câu trả lời được lưu trên thiết bị để giáo viên xem và đánh giá.
     </div>
 
     ${essays.map((q, i) => `
-
       <div class="quiz-q">
-
-        <p>
-          <b>
-            Câu tự luận ${i + 1}.
-          </b>
-        </p>
-
-        <p>
-          ${esc(q.text)}
-        </p>
-
+        <p><b>Câu tự luận ${i + 1}.</b></p>
+        <p>${esc(q.text)}</p>
         <textarea
           id="essay_${i}"
           rows="7"
           aria-label="Câu tự luận ${i + 1}"
           style="width:100%;box-sizing:border-box;padding:14px;border-radius:10px;border:1px solid #d6dce5;font-size:16px;resize:vertical;"
           placeholder="Nhập câu trả lời của em..."></textarea>
-
       </div>
-
     `).join("")}
-
   </div>
 
   <div class="toolbar">
-
-    <button
-      type="button"
-      class="btn primary"
-      onclick="submitQuiz()">
-
-      📤 Nộp bài
-
-    </button>
-
-    <button
-      type="button"
-      class="btn"
-      onclick="view('lessons')">
-
-      📚 Về bài học
-
-    </button>
-
+    <button type="button" class="btn primary" onclick="submitQuiz()">📤 Nộp bài</button>
+    <button type="button" class="btn" onclick="view('quiz')">📚 Chọn bài khác</button>
+    <button type="button" class="btn" onclick="view('lessons')">📚 Về bài học</button>
   </div>
 
   <div id="quizResult"></div>
-
   `;
 
   window.scrollTo(0, 0);
@@ -1949,6 +1822,15 @@ function submitQuiz() {
     className:
       S.user?.className || "",
 
+    lesson:
+      x.sourceLessonId || "",
+
+    lessonCode:
+      T9.lessons.find(l => String(l.id) === String(x.sourceLessonId))?.code || "",
+
+    lessonTitle:
+      T9.lessons.find(l => String(l.id) === String(x.sourceLessonId))?.title || "",
+
     answers:
       essayAnswers
 
@@ -1965,6 +1847,12 @@ function submitQuiz() {
 
     lesson:
       x.sourceLessonId || "tong-hop",
+
+    lessonCode:
+      T9.lessons.find(l => String(l.id) === String(x.sourceLessonId))?.code || "",
+
+    lessonTitle:
+      T9.lessons.find(l => String(l.id) === String(x.sourceLessonId))?.title || "",
 
     score:
       score,
@@ -2075,7 +1963,7 @@ function submitQuiz() {
     <button
       type="button"
       class="btn primary"
-      onclick="startQuiz()">
+      onclick="startQuiz('${x.sourceLessonId}')">
 
       🔄 Làm lại
 
