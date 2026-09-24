@@ -3,58 +3,103 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>TIN9 - Học Tin học 9</title>
 
     <style>
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
+            font-family: Arial, sans-serif;
             background: #f4f7fb;
-            color: #222;
+            color: #1f2937;
         }
 
         header {
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
-            padding: 30px;
             text-align: center;
+            padding: 45px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 40px;
+        }
+
+        header p {
+            font-size: 20px;
+            margin-top: 15px;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: auto;
-            padding: 30px;
+            padding: 35px 20px;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .welcome h2 {
+            font-size: 30px;
         }
 
         .menu {
             display: grid;
             grid-template-columns:
-                repeat(auto-fit, minmax(200px, 1fr));
+                repeat(auto-fit, minmax(230px, 1fr));
 
-            gap: 20px;
+            gap: 25px;
         }
 
         .card {
             background: white;
-            padding: 25px;
-            border-radius: 15px;
+            border-radius: 18px;
+            padding: 30px 20px;
             text-align: center;
 
-            box-shadow:
-                0 3px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon {
+            font-size: 50px;
+        }
+
+        .card h3 {
+            font-size: 23px;
+        }
+
+        .card p {
+            min-height: 45px;
+            color: #555;
         }
 
         button {
+            border: none;
             background: #2563eb;
             color: white;
 
-            border: none;
-            padding: 12px 20px;
+            padding: 13px 25px;
 
-            border-radius: 8px;
+            border-radius: 10px;
+
+            font-size: 16px;
 
             cursor: pointer;
         }
@@ -63,11 +108,114 @@
             background: #1d4ed8;
         }
 
+        /* KHU VỰC BÀI HỌC */
+
+        #baiHoc {
+            display: none;
+            margin-top: 35px;
+        }
+
+        .lesson-title {
+            background: #2563eb;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .lesson {
+            background: white;
+            margin: 15px 0;
+            padding: 20px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        .lesson h3 {
+            margin: 0 0 8px 0;
+        }
+
+        .lesson p {
+            margin: 0;
+            color: #666;
+        }
+
+        .lesson-content {
+            display: none;
+
+            background: #ffffff;
+
+            padding: 30px;
+
+            margin-top: 20px;
+
+            border-radius: 15px;
+
+            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+        }
+
+        .lesson-content h2 {
+            color: #2563eb;
+        }
+
+        .remember {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+
+            padding: 15px;
+
+            margin: 20px 0;
+        }
+
+        .back {
+            background: #64748b;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            background: #1e293b;
+            color: white;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            header p {
+                font-size: 16px;
+            }
+
+            .lesson {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .lesson button {
+                width: 100%;
+            }
+
+        }
+
     </style>
 
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -82,13 +230,26 @@
 
 <div class="container">
 
-    <h2>🎯 Khu vực học tập</h2>
 
-    <div class="menu">
+    <div class="welcome">
+
+        <h2>🎯 Khu vực học tập</h2>
+
+        <p>
+            Chào mừng em đến với hệ thống học Tin học 9
+        </p>
+
+    </div>
+
+
+    <!-- MENU CHÍNH -->
+
+    <div class="menu" id="menu">
+
 
         <div class="card">
 
-            <h2>📚</h2>
+            <div class="icon">📚</div>
 
             <h3>Bài học</h3>
 
@@ -96,7 +257,7 @@
                 Học kiến thức Tin học 9
             </p>
 
-            <button>
+            <button onclick="moBaiHoc()">
                 Vào học
             </button>
 
@@ -105,7 +266,7 @@
 
         <div class="card">
 
-            <h2>📝</h2>
+            <div class="icon">📝</div>
 
             <h3>Luyện tập</h3>
 
@@ -113,7 +274,7 @@
                 Làm bài tập và kiểm tra
             </p>
 
-            <button>
+            <button onclick="thongBao('Phần Luyện tập sẽ được xây dựng tiếp theo.')">
                 Làm bài
             </button>
 
@@ -122,7 +283,7 @@
 
         <div class="card">
 
-            <h2>💻</h2>
+            <div class="icon">💻</div>
 
             <h3>Python</h3>
 
@@ -130,7 +291,7 @@
                 Học lập trình Python
             </p>
 
-            <button>
+            <button onclick="thongBao('Phần Python sẽ được xây dựng tiếp theo.')">
                 Lập trình
             </button>
 
@@ -139,7 +300,7 @@
 
         <div class="card">
 
-            <h2>🤖</h2>
+            <div class="icon">🤖</div>
 
             <h3>Trợ lý AI</h3>
 
@@ -147,15 +308,309 @@
                 Hỗ trợ học tập thông minh
             </p>
 
-            <button>
+            <button onclick="thongBao('Phần Trợ lý AI sẽ được tích hợp sau.')">
                 Hỏi AI
             </button>
 
         </div>
 
+
     </div>
 
+
+    <!-- DANH SÁCH BÀI HỌC -->
+
+    <section id="baiHoc">
+
+        <div class="lesson-title">
+
+            <h2>📚 BÀI HỌC TIN HỌC 9</h2>
+
+            <p>
+                Chọn bài học để bắt đầu
+            </p>
+
+        </div>
+
+
+        <div class="lesson">
+
+            <div>
+
+                <h3>💻 Bài 1: Máy tính và cộng đồng</h3>
+
+                <p>
+                    Tìm hiểu vai trò của máy tính và công nghệ số.
+                </p>
+
+            </div>
+
+            <button onclick="moNoiDung(1)">
+                Học bài
+            </button>
+
+        </div>
+
+
+        <div class="lesson">
+
+            <div>
+
+                <h3>🌐 Bài 2: Mạng máy tính và Internet</h3>
+
+                <p>
+                    Tìm hiểu mạng máy tính và Internet.
+                </p>
+
+            </div>
+
+            <button onclick="moNoiDung(2)">
+                Học bài
+            </button>
+
+        </div>
+
+
+        <div class="lesson">
+
+            <div>
+
+                <h3>🔐 Bài 3: An toàn trong môi trường số</h3>
+
+                <p>
+                    Bảo vệ thông tin cá nhân và sử dụng Internet an toàn.
+                </p>
+
+            </div>
+
+            <button onclick="moNoiDung(3)">
+                Học bài
+            </button>
+
+        </div>
+
+
+        <div class="lesson">
+
+            <div>
+
+                <h3>🧠 Bài 4: Giải quyết vấn đề với máy tính</h3>
+
+                <p>
+                    Tư duy thuật toán và giải quyết bài toán.
+                </p>
+
+            </div>
+
+            <button onclick="moNoiDung(4)">
+                Học bài
+            </button>
+
+        </div>
+
+
+        <div class="lesson">
+
+            <div>
+
+                <h3>🐍 Bài 5: Lập trình Python</h3>
+
+                <p>
+                    Làm quen với lập trình và xây dựng chương trình.
+                </p>
+
+            </div>
+
+            <button onclick="moNoiDung(5)">
+                Học bài
+            </button>
+
+        </div>
+
+
+        <!-- NỘI DUNG BÀI -->
+
+        <div id="noiDung" class="lesson-content">
+
+            <h2 id="tieuDeBai"></h2>
+
+            <p id="noiDungBai"></p>
+
+            <div class="remember">
+
+                <strong>🎯 Em cần nhớ:</strong>
+
+                <p id="ghiNho"></p>
+
+            </div>
+
+            <button class="back" onclick="quayLaiDanhSach()">
+                ← Quay lại danh sách bài học
+            </button>
+
+        </div>
+
+
+        <button class="back" onclick="quayVeTrangChu()">
+            ← Quay về trang chủ
+        </button>
+
+
+    </section>
+
+
 </div>
+
+
+<footer>
+
+    <p>
+        💻 TIN9 - Học Tin học 9
+    </p>
+
+    <p>
+        Trường THCS và THPT Phú Thành
+    </p>
+
+</footer>
+
+
+<script>
+
+    function moBaiHoc() {
+
+        document.getElementById("menu").style.display = "none";
+
+        document.getElementById("baiHoc").style.display = "block";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    function quayVeTrangChu() {
+
+        document.getElementById("baiHoc").style.display = "none";
+
+        document.getElementById("menu").style.display = "grid";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    function moNoiDung(bai) {
+
+        let tieuDe = "";
+
+        let noiDung = "";
+
+        let ghiNho = "";
+
+
+        if (bai == 1) {
+
+            tieuDe = "💻 Bài 1: Máy tính và cộng đồng";
+
+            noiDung =
+                "Máy tính và công nghệ số có vai trò quan trọng trong học tập, lao động và đời sống. Học sinh cần biết sử dụng công nghệ một cách hiệu quả và có trách nhiệm.";
+
+            ghiNho =
+                "Máy tính là công cụ hỗ trợ con người xử lý thông tin, giải quyết vấn đề và tạo ra các sản phẩm số.";
+
+        }
+
+
+        if (bai == 2) {
+
+            tieuDe = "🌐 Bài 2: Mạng máy tính và Internet";
+
+            noiDung =
+                "Mạng máy tính cho phép các thiết bị kết nối và trao đổi dữ liệu. Internet là mạng máy tính toàn cầu cung cấp nhiều dịch vụ phục vụ học tập và đời sống.";
+
+            ghiNho =
+                "Internet giúp kết nối và chia sẻ thông tin nhưng người sử dụng phải biết bảo vệ tài khoản và thông tin cá nhân.";
+
+        }
+
+
+        if (bai == 3) {
+
+            tieuDe = "🔐 Bài 3: An toàn trong môi trường số";
+
+            noiDung =
+                "Trong môi trường số, học sinh cần bảo vệ mật khẩu, thông tin cá nhân và nhận biết các nguy cơ như lừa đảo, mã độc và thông tin giả.";
+
+            ghiNho =
+                "Không chia sẻ mật khẩu, không cung cấp thông tin cá nhân cho người lạ và cần kiểm tra nguồn thông tin trước khi tin tưởng.";
+
+        }
+
+
+        if (bai == 4) {
+
+            tieuDe = "🧠 Bài 4: Giải quyết vấn đề với máy tính";
+
+            noiDung =
+                "Để giải quyết một bài toán bằng máy tính, chúng ta cần xác định bài toán, xây dựng thuật toán và thực hiện thuật toán bằng chương trình.";
+
+            ghiNho =
+                "Thuật toán là dãy hữu hạn các bước được sắp xếp theo một trình tự xác định để giải quyết bài toán.";
+
+        }
+
+
+        if (bai == 5) {
+
+            tieuDe = "🐍 Bài 5: Lập trình Python";
+
+            noiDung =
+                "Python là một ngôn ngữ lập trình phổ biến, có cú pháp tương đối đơn giản và phù hợp để học lập trình.";
+
+            ghiNho =
+                "Khi lập trình cần xác định dữ liệu vào, xử lý và dữ liệu ra của bài toán.";
+
+        }
+
+
+        document.getElementById("tieuDeBai").innerText = tieuDe;
+
+        document.getElementById("noiDungBai").innerText = noiDung;
+
+        document.getElementById("ghiNho").innerText = ghiNho;
+
+
+        document.getElementById("noiDung").style.display = "block";
+
+        window.scrollTo({
+            top: document.getElementById("noiDung").offsetTop - 20,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    function quayLaiDanhSach() {
+
+        document.getElementById("noiDung").style.display = "none";
+
+    }
+
+
+    function thongBao(noiDung) {
+
+        alert(noiDung);
+
+    }
+
+</script>
+
 
 </body>
 
