@@ -246,10 +246,23 @@ function login() {
     <div class="field">
 
       <label>
+        Lớp
+      </label>
+
+      <input
+        id="className"
+        placeholder="Ví dụ: 9A1"
+        autocomplete="off">
+
+    </div>
+
+    <div class="field">
+
+      <label>
         Vai trò
       </label>
 
-      <select id="role">
+      <select id="role" onchange="toggleClassField()">
 
         <option value="student">
           Học sinh
@@ -281,6 +294,25 @@ function login() {
 
   </div>
   `;
+
+  toggleClassField();
+}
+
+function toggleClassField() {
+
+  const role = $("role")?.value;
+  const field = $("className");
+
+  if (!field) return;
+
+  field.disabled = role === "teacher";
+
+  if (role === "teacher") {
+    field.value = "";
+    field.placeholder = "Không bắt buộc đối với giáo viên";
+  } else {
+    field.placeholder = "Ví dụ: 9A1";
+  }
 }
 
 function enter() {
@@ -288,18 +320,36 @@ function enter() {
   const name =
     $("name").value.trim();
 
+  const className =
+    $("className")?.value.trim() || "";
+
+  const role =
+    $("role").value;
+
   if (!name) {
 
     alert(
       "Vui lòng nhập họ tên."
     );
 
+    $("name").focus();
+    return;
+  }
+
+  if (role === "student" && !className) {
+
+    alert(
+      "Vui lòng nhập lớp."
+    );
+
+    $("className").focus();
     return;
   }
 
   S.user = {
     name: name,
-    role: $("role").value
+    className: className,
+    role: role
   };
 
   save();
@@ -364,7 +414,9 @@ function view(v) {
   if ($("userLabel")) {
 
     $("userLabel").textContent =
-      S.user ? S.user.name : "";
+      S.user
+        ? `${S.user.name}${S.user.className ? " • " + S.user.className : ""}`
+        : "";
 
   }
 
@@ -392,6 +444,12 @@ function dashboard() {
     <h1>
       Chào ${esc(S.user.name)} 👋
     </h1>
+
+    ${S.user.className ? `
+      <p class="muted">
+        Lớp: <b>${esc(S.user.className)}</b>
+      </p>
+    ` : ""}
 
     <p>
       TIN9 Phú Thành 3.0 xây dựng
@@ -765,202 +823,346 @@ function openLesson(id) {
 
   if (!l) return;
 
+  const completed =
+    S.done.includes(l.id);
+
+  const content =
+    lessonText(l.id);
+
   $("main").innerHTML = `
 
-  <button
-    class="btn"
-    onclick="view('lessons')">
+    <div class="lesson-page">
 
-    ← Danh sách bài
+      <!-- QUAY LẠI -->
+      <div class="toolbar">
 
-  </button>
+        <button
+          class="btn"
+          onclick="view('lessons')">
 
-  <div class="panel">
+          ← Danh sách bài học
 
-    <span class="tag">
-      ${l.code}
-    </span>
+        </button>
 
-    <h1>
-      ${l.title}
-    </h1>
+        <span class="muted">
+          ${BRANCH === "9a"
+            ? "Nhánh 9a – Bảng tính"
+            : "Nhánh 9b – Làm video"}
+        </span>
 
-    <p class="muted">
-      Mục tiêu: hiểu kiến thức,
-      vận dụng vào tình huống thực tế
-      và tự đánh giá mức độ hiểu.
-    </p>
+      </div>
 
-    <div class="callout blue">
 
-      <b>
-        🎯 Mục tiêu học tập
-      </b>
+      <!-- TIÊU ĐỀ BÀI -->
+      <div class="hero">
 
-      <p>
-        Nắm được kiến thức trọng tâm
-        và biết vận dụng vào tình huống
-        thực tế.
-      </p>
+        <span class="tag">
+          ${l.code}
+        </span>
 
-    </div>
+        <h1>
+          ${esc(l.title)}
+        </h1>
 
-    <h3>
-      📖 Nội dung trọng tâm
-    </h3>
-
-    <p>
-      ${lessonText(l.id)}
-    </p>
-
-    <div class="callout green">
-
-      <b>
-        💡 Em cần nhớ
-      </b>
-
-      <p>
-        Hãy tự diễn đạt lại kiến thức
-        bằng lời của mình.
-      </p>
-
-    </div>
-
-    <div class="callout orange">
-
-      <b>
-        🧠 Thử thách
-      </b>
-
-      <p>
-        Hãy tạo một ví dụ gần với
-        hoạt động học tập hoặc đời sống.
-      </p>
-
-    </div>
-
-    <div class="toolbar">
-
-      <button
-        class="btn primary"
-        onclick="
-          view('quiz');
-          setTimeout(
-            ()=>startQuiz('${l.id}'),
-            50
-          );
-        ">
-
-        📝 Luyện tập bài này
-
-      </button>
-
-      <button
-        class="btn success"
-        onclick="complete('${l.id}')">
+        <p>
+          Học tập theo tiến trình:
+          <b>
+            Khởi động → Khám phá → Thực hành
+            → Thử thách → Tự đánh giá
+          </b>
+        </p>
 
         ${
-          S.done.includes(l.id)
-          ? "✓ Đã hoàn thành"
-          : "☑ Đánh dấu đã hoàn thành"
+          completed
+          ? `
+          <div class="callout green">
+
+            ✅ Em đã hoàn thành bài học này.
+
+          </div>
+          `
+          : ""
         }
 
-      </button>
+      </div>
+
+
+      <!-- MỤC TIÊU -->
+      <div class="panel">
+
+        <h2>
+          🎯 1. Mục tiêu học tập
+        </h2>
+
+        <div class="callout blue">
+
+          <p>
+            Sau bài học, học sinh cần:
+          </p>
+
+          <ul>
+
+            <li>
+              Hiểu được kiến thức trọng tâm
+              của bài học.
+            </li>
+
+            <li>
+              Biết liên hệ kiến thức với
+              tình huống thực tế.
+            </li>
+
+            <li>
+              Biết thực hành và tự kiểm tra
+              mức độ hiểu bài.
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <!-- KHỞI ĐỘNG -->
+      <div class="panel">
+
+        <h2>
+          🚀 2. Khởi động
+        </h2>
+
+        <p>
+          Hãy suy nghĩ về một tình huống
+          trong học tập hoặc cuộc sống có
+          liên quan đến nội dung của bài học.
+        </p>
+
+        <div class="callout orange">
+
+          <b>Câu hỏi gợi mở:</b>
+
+          <p>
+            Em đã từng gặp vấn đề này chưa?
+            Em đã giải quyết như thế nào?
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- KHÁM PHÁ -->
+      <div class="panel">
+
+        <h2>
+          📖 3. Khám phá kiến thức
+        </h2>
+
+        <div class="callout blue">
+
+          <b>Nội dung trọng tâm</b>
+
+          <p>
+            ${esc(content)}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- EM CẦN NHỚ -->
+      <div class="panel">
+
+        <h2>
+          🧠 4. Em cần nhớ
+        </h2>
+
+        <div class="callout green">
+
+          <p>
+            Hãy tự diễn đạt kiến thức
+            bằng lời của mình.
+          </p>
+
+          <p>
+            Nếu chưa thể giải thích lại,
+            em nên đọc lại phần kiến thức
+            trọng tâm trước khi chuyển sang
+            thực hành.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- THỰC HÀNH -->
+      <div class="panel">
+
+        <h2>
+          🛠️ 5. Thực hành
+        </h2>
+
+        <p>
+          Hãy thực hiện một nhiệm vụ nhỏ
+          liên quan đến nội dung vừa học.
+        </p>
+
+        <div class="callout blue">
+
+          <b>Nhiệm vụ:</b>
+
+          <p>
+            Hãy tạo một ví dụ gần với
+            hoạt động học tập hoặc đời sống
+            của em và giải thích cách thực hiện.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- THỬ THÁCH -->
+      <div class="panel">
+
+        <h2>
+          🌟 6. Thử thách
+        </h2>
+
+        <div class="callout orange">
+
+          <b>Dành cho học sinh muốn mở rộng</b>
+
+          <p>
+            Hãy tìm một tình huống thực tế
+            khác có thể áp dụng kiến thức
+            của bài học.
+          </p>
+
+          <p>
+            Em có thể trình bày bằng văn bản,
+            hình ảnh, bảng tính, video hoặc
+            sản phẩm số phù hợp.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- TỰ ĐÁNH GIÁ -->
+      <div class="panel">
+
+        <h2>
+          ✅ 7. Tự đánh giá
+        </h2>
+
+        <div class="quiz-q">
+
+          <p>
+            <b>
+              Em đã hiểu nội dung bài học
+              ở mức nào?
+            </b>
+          </p>
+
+          <label>
+            <input
+              type="radio"
+              name="selfLevel">
+            Em còn cần hỗ trợ
+          </label>
+
+          <br>
+
+          <label>
+            <input
+              type="radio"
+              name="selfLevel">
+            Em đã hiểu kiến thức cơ bản
+          </label>
+
+          <br>
+
+          <label>
+            <input
+              type="radio"
+              name="selfLevel">
+            Em có thể vận dụng và mở rộng
+          </label>
+
+        </div>
+
+      </div>
+
+
+      <!-- HÀNH ĐỘNG -->
+      <div class="panel">
+
+        <h2>
+          📌 8. Hoạt động tiếp theo
+        </h2>
+
+        <div class="toolbar">
+
+          <button
+            class="btn primary"
+            onclick="
+              view('quiz');
+              setTimeout(
+                () => startQuiz('${l.id}'),
+                50
+              );
+            ">
+
+            📝 Luyện tập bài này
+
+          </button>
+
+
+          <button
+            class="btn success"
+            onclick="complete('${l.id}')">
+
+            ${
+              completed
+              ? "✓ Đã hoàn thành"
+              : "☑ Đánh dấu đã hoàn thành"
+            }
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- ĐIỀU HƯỚNG -->
+      <div class="toolbar">
+
+        <button
+          class="btn"
+          onclick="view('lessons')">
+
+          ← Về danh sách bài
+
+        </button>
+
+        <button
+          class="btn primary"
+          onclick="view('progress')">
+
+          📊 Xem tiến bộ
+
+        </button>
+
+      </div>
 
     </div>
 
-  </div>
   `;
-}
-
-function lessonText(id) {
-
-  const text = {
-
-    "1":
-      "Công nghệ số đang thay đổi cách con người học tập, làm việc, giao tiếp và giải trí.",
-
-    "2":
-      "Thông tin có vai trò quan trọng trong quá trình giải quyết vấn đề. Cần xác định thông tin cần thiết, tìm kiếm và lựa chọn dữ liệu phù hợp.",
-
-    "3":
-      "Đánh giá chất lượng thông tin cần xem xét nguồn, tác giả, thời điểm, bằng chứng và đối chiếu với các nguồn khác.",
-
-    "4":
-      "Khi sử dụng dịch vụ Internet cần tôn trọng quyền riêng tư, quyền tác giả, danh dự và các quy định pháp luật.",
-
-    "5":
-      "Phần mềm mô phỏng cho phép người học quan sát và thử nghiệm các hiện tượng hoặc quá trình trên môi trường máy tính.",
-
-    "6":
-      "Khai thác phần mềm mô phỏng cần xác định mục tiêu, lựa chọn tham số phù hợp và quan sát kết quả.",
-
-    "7":
-      "Công cụ trực quan giúp trình bày thông tin rõ ràng, dễ hiểu và hỗ trợ trao đổi, hợp tác.",
-
-    "8":
-      "Sử dụng công cụ trực quan cần lựa chọn hình ảnh, sơ đồ hoặc biểu đồ phù hợp với nội dung cần truyền đạt.",
-
-    "9a":
-      "Công cụ xác thực dữ liệu giúp kiểm soát dữ liệu nhập vào bảng tính, hạn chế sai sót và tạo dữ liệu nhất quán.",
-
-    "10a":
-      "Hàm COUNTIF dùng để đếm số ô trong một vùng dữ liệu thỏa mãn điều kiện xác định.",
-
-    "11a":
-      "Hàm SUMIF dùng để tính tổng các giá trị trong một vùng dữ liệu thỏa mãn điều kiện.",
-
-    "12a":
-      "Hàm IF cho phép tạo kết quả khác nhau tùy thuộc vào điều kiện đúng hoặc sai.",
-
-    "13a":
-      "Hoàn thiện bảng tính quản lí tài chính gia đình cần tổ chức dữ liệu rõ ràng, sử dụng công thức phù hợp và kiểm tra kết quả.",
-
-    "9b":
-      "Phần mềm làm video cung cấp các công cụ để tổ chức hình ảnh, âm thanh, chữ và hiệu ứng.",
-
-    "10b":
-      "Chuẩn bị dữ liệu và dựng video cần xác định kịch bản, tư liệu, âm thanh và trình tự các cảnh.",
-
-    "11b":
-      "Dựng video theo kịch bản là quá trình sắp xếp tư liệu theo trình tự và mục đích đã xác định.",
-
-    "12b":
-      "Hoàn thành video cần kiểm tra nội dung, hình ảnh, âm thanh và sự phù hợp với kịch bản.",
-
-    "13b":
-      "Biên tập và xuất video giúp hoàn thiện sản phẩm và tạo tệp phù hợp để chia sẻ.",
-
-    "14":
-      "Giải quyết vấn đề cần xác định rõ yêu cầu, phân tích dữ liệu và xây dựng phương án giải quyết.",
-
-    "15":
-      "Bài toán tin học cần xác định dữ liệu vào, kết quả cần đạt và cách xử lí để tạo ra kết quả.",
-
-    "16":
-      "Lập trình là quá trình chuyển cách giải thành chương trình, chạy thử, phát hiện và sửa lỗi.",
-
-    "17":
-      "Tin học mở ra nhiều cơ hội nghề nghiệp. Năng lực công nghệ, giao tiếp và giải quyết vấn đề là những năng lực hữu ích trong môi trường số."
-
-  };
-
-  return text[id] ||
-    "Hãy đọc mục tiêu, thực hành và tự tạo ví dụ.";
-}
-
-function complete(id) {
-
-  if (!S.done.includes(id))
-    S.done.push(id);
-
-  save();
-
-  alert(
-    "✅ Đã ghi nhận tiến độ học tập."
-  );
-
-  openLesson(id);
 }
 
 /* =========================
