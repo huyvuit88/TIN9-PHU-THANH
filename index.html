@@ -12,9 +12,9 @@
 
 <style>
 
-/* ================================
-   THIẾT LẬP CHUNG
-================================ */
+/* =====================================================
+   CÀI ĐẶT CHUNG
+===================================================== */
 
 * {
     box-sizing: border-box;
@@ -26,239 +26,165 @@ html {
 
 body {
     margin: 0;
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background: #f3f6fb;
-
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
     color: #1f2937;
 }
 
 
-/* ================================
+/* =====================================================
    HEADER
-================================ */
+===================================================== */
 
 header {
-
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #1e40af
-        );
-
+    background: linear-gradient(135deg, #2563eb, #1e40af);
     color: white;
-
     text-align: center;
-
-    padding: 45px 20px;
-
+    padding: 42px 20px;
 }
 
 header h1 {
-
     margin: 0;
-
-    font-size: 42px;
-
-    font-weight: 700;
-
+    font-size: 40px;
 }
 
 header p {
-
-    margin-top: 15px;
-
+    margin: 12px 0 0;
     font-size: 19px;
-
 }
 
 
-/* ================================
-   THANH ĐIỀU HƯỚNG
-================================ */
+/* =====================================================
+   THANH MENU
+===================================================== */
 
 .navbar {
-
-    background: white;
-
-    box-shadow:
-        0 2px 10px
-        rgba(0,0,0,0.08);
-
     position: sticky;
-
     top: 0;
-
     z-index: 1000;
-
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.10);
 }
 
 .nav-container {
-
     max-width: 1200px;
-
     margin: auto;
+    padding: 10px 15px;
 
     display: flex;
-
     justify-content: center;
-
     flex-wrap: wrap;
-
     gap: 8px;
-
-    padding: 10px;
-
 }
 
 .nav-btn {
-
+    border: 1px solid #dbeafe;
     background: white;
-
     color: #1d4ed8;
 
-    border: 1px solid #dbeafe;
-
-    padding: 10px 16px;
-
+    padding: 10px 15px;
     border-radius: 8px;
 
     cursor: pointer;
-
     font-size: 14px;
-
 }
 
 .nav-btn:hover {
-
     background: #eff6ff;
-
 }
 
 
-/* ================================
-   CONTAINER
-================================ */
+/* =====================================================
+   KHUNG CHÍNH
+===================================================== */
 
 .container {
-
     max-width: 1200px;
-
     margin: auto;
-
     padding: 30px 20px;
-
 }
 
 
-/* ================================
+/* =====================================================
+   CÁC TRANG
+===================================================== */
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+
+/* =====================================================
    TRANG CHỦ
-================================ */
+===================================================== */
 
 .welcome {
-
     text-align: center;
-
     margin-bottom: 30px;
-
 }
 
 .welcome h2 {
-
-    font-size: 30px;
-
     color: #1e40af;
-
+    font-size: 30px;
 }
 
 .welcome p {
-
     color: #64748b;
-
 }
 
-
-/* ================================
-   THẺ CHỨC NĂNG
-================================ */
-
 .menu {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(220px, 1fr)
-        );
-
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(220px, 1fr)
+    );
     gap: 22px;
-
 }
 
 .card {
-
     background: white;
-
     border-radius: 18px;
-
     padding: 28px 20px;
-
     text-align: center;
 
     box-shadow:
-        0 5px 18px
-        rgba(0,0,0,0.10);
+        0 5px 18px rgba(0,0,0,0.10);
 
-    transition: 0.3s;
-
+    transition: 0.25s;
 }
 
 .card:hover {
-
     transform: translateY(-5px);
 
     box-shadow:
-        0 10px 25px
-        rgba(0,0,0,0.15);
-
+        0 10px 25px rgba(0,0,0,0.15);
 }
 
 .card-icon {
-
     font-size: 48px;
-
 }
 
 .card h3 {
-
     font-size: 22px;
-
 }
 
 .card p {
-
     color: #64748b;
-
     min-height: 45px;
-
 }
 
 
-/* ================================
+/* =====================================================
    NÚT
-================================ */
+===================================================== */
 
 button {
-
     border: none;
-
     background: #2563eb;
-
     color: white;
 
     padding: 11px 20px;
@@ -268,46 +194,41 @@ button {
     cursor: pointer;
 
     font-size: 15px;
-
 }
 
 button:hover {
-
     background: #1d4ed8;
-
 }
 
 .btn-secondary {
-
     background: #64748b;
-
 }
 
 .btn-success {
-
     background: #16a34a;
+}
 
+.btn-success:hover {
+    background: #15803d;
 }
 
 .btn-warning {
-
     background: #d97706;
+}
 
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 
-/* ================================
-   KHU VỰC BÀI HỌC
-================================ */
-
-#lessonSection {
-
-    display: none;
-
-}
+/* =====================================================
+   TIÊU ĐỀ TRANG
+===================================================== */
 
 .section-title {
-
     background:
         linear-gradient(
             135deg,
@@ -322,22 +243,18 @@ button:hover {
     border-radius: 15px;
 
     margin-bottom: 25px;
-
 }
 
 .section-title h2 {
-
-    margin: 0 0 8px 0;
-
+    margin: 0 0 8px;
 }
 
 
-/* ================================
+/* =====================================================
    THANH TIẾN ĐỘ
-================================ */
+===================================================== */
 
 .progress-box {
-
     background: white;
 
     padding: 20px;
@@ -347,15 +264,11 @@ button:hover {
     margin-bottom: 25px;
 
     box-shadow:
-        0 3px 12px
-        rgba(0,0,0,0.08);
-
+        0 3px 12px rgba(0,0,0,0.08);
 }
 
 .progress-bar {
-
     width: 100%;
-
     height: 18px;
 
     background: #e5e7eb;
@@ -365,14 +278,11 @@ button:hover {
     overflow: hidden;
 
     margin-top: 10px;
-
 }
 
 .progress-value {
-
-    height: 100%;
-
     width: 0%;
+    height: 100%;
 
     background:
         linear-gradient(
@@ -382,22 +292,18 @@ button:hover {
         );
 
     transition: 0.5s;
-
 }
 
 
-/* ================================
+/* =====================================================
    TÌM KIẾM
-================================ */
+===================================================== */
 
 .search-box {
-
     margin-bottom: 25px;
-
 }
 
 .search-box input {
-
     width: 100%;
 
     padding: 14px 18px;
@@ -409,26 +315,21 @@ button:hover {
     font-size: 16px;
 
     outline: none;
-
 }
 
 .search-box input:focus {
-
     border-color: #2563eb;
 
     box-shadow:
-        0 0 0 3px
-        rgba(37,99,235,0.1);
-
+        0 0 0 3px rgba(37,99,235,0.12);
 }
 
 
-/* ================================
+/* =====================================================
    CHỦ ĐỀ
-================================ */
+===================================================== */
 
 .topic {
-
     background: white;
 
     border-radius: 16px;
@@ -438,44 +339,33 @@ button:hover {
     overflow: hidden;
 
     box-shadow:
-        0 3px 12px
-        rgba(0,0,0,0.08);
-
+        0 3px 12px rgba(0,0,0,0.08);
 }
 
 .topic-header {
-
     background: #dbeafe;
 
     color: #1e3a8a;
 
     padding: 20px;
-
 }
 
 .topic-header h3 {
-
     margin: 0;
-
     font-size: 20px;
-
 }
 
 .topic-header p {
-
-    margin: 8px 0 0 0;
-
+    margin: 8px 0 0;
     color: #475569;
-
 }
 
 
-/* ================================
+/* =====================================================
    BÀI HỌC
-================================ */
+===================================================== */
 
 .lesson {
-
     padding: 18px 20px;
 
     border-top: 1px solid #e5e7eb;
@@ -487,59 +377,47 @@ button:hover {
     align-items: center;
 
     gap: 20px;
-
 }
 
 .lesson:hover {
-
     background: #f8fafc;
-
 }
 
 .lesson-info {
-
     flex: 1;
-
 }
 
 .lesson-title {
-
     font-size: 17px;
 
     font-weight: 600;
 
     color: #1e293b;
-
 }
 
 .lesson-description {
-
     margin-top: 6px;
 
     color: #64748b;
 
     font-size: 14px;
-
 }
 
 .lesson-actions {
-
     display: flex;
 
     gap: 8px;
 
     flex-wrap: wrap;
-
 }
 
 
-/* ================================
-   NHÁNH 9A / 9B
-================================ */
+/* =====================================================
+   NHÁNH A / B
+===================================================== */
 
 .branch-title {
-
-    margin-top: 20px;
+    margin: 20px;
 
     padding: 15px 20px;
 
@@ -550,24 +428,19 @@ button:hover {
     font-weight: bold;
 
     border-radius: 10px;
-
 }
 
 .branch-video {
-
     background: #ede9fe;
-
     color: #5b21b6;
-
 }
 
 
-/* ================================
+/* =====================================================
    CHI TIẾT BÀI
-================================ */
+===================================================== */
 
-#lessonDetail {
-
+.detail-box {
     display: none;
 
     background: white;
@@ -576,34 +449,31 @@ button:hover {
 
     border-radius: 18px;
 
+    margin-top: 25px;
+
     box-shadow:
-        0 5px 18px
-        rgba(0,0,0,0.10);
+        0 5px 18px rgba(0,0,0,0.10);
+}
 
-    margin-bottom: 30px;
-
+.detail-box.active {
+    display: block;
 }
 
 .detail-header {
-
     border-bottom: 2px solid #dbeafe;
 
     padding-bottom: 20px;
 
     margin-bottom: 25px;
-
 }
 
 .detail-header h2 {
-
     color: #1d4ed8;
 
     margin-top: 0;
-
 }
 
 .info-box {
-
     background: #eff6ff;
 
     border-left: 5px solid #2563eb;
@@ -613,11 +483,9 @@ button:hover {
     border-radius: 8px;
 
     margin: 20px 0;
-
 }
 
 .remember-box {
-
     background: #ecfdf5;
 
     border-left: 5px solid #16a34a;
@@ -627,11 +495,9 @@ button:hover {
     border-radius: 8px;
 
     margin: 20px 0;
-
 }
 
 .challenge-box {
-
     background: #fff7ed;
 
     border-left: 5px solid #f97316;
@@ -641,22 +507,14 @@ button:hover {
     border-radius: 8px;
 
     margin: 20px 0;
-
 }
 
 
-/* ================================
-   KHU VỰC KHÁC
-================================ */
-
-#otherSection {
-
-    display: none;
-
-}
+/* =====================================================
+   TRANG CHỨC NĂNG
+===================================================== */
 
 .feature-page {
-
     background: white;
 
     padding: 35px;
@@ -664,49 +522,60 @@ button:hover {
     border-radius: 18px;
 
     box-shadow:
-        0 5px 18px
-        rgba(0,0,0,0.10);
+        0 5px 18px rgba(0,0,0,0.10);
 
     text-align: center;
-
 }
 
-.feature-page .big-icon {
-
+.big-icon {
     font-size: 70px;
+}
 
+.feature-page h2 {
+    color: #1e40af;
 }
 
 
-/* ================================
+/* =====================================================
    GÓC GIÁO VIÊN
-================================ */
+===================================================== */
 
 .teacher-box {
-
-    text-align: left;
-
-    max-width: 800px;
-
+    max-width: 850px;
     margin: auto;
-
+    text-align: left;
 }
 
 .teacher-item {
+    padding: 18px;
 
-    padding: 15px;
-
-    border-bottom: 1px solid #e5e7eb;
-
+    border-bottom:
+        1px solid #e5e7eb;
 }
 
 
-/* ================================
+/* =====================================================
+   THÔNG BÁO
+===================================================== */
+
+.notice {
+    padding: 15px 18px;
+
+    background: #fef3c7;
+
+    color: #92400e;
+
+    border-radius: 10px;
+
+    margin: 20px 0;
+}
+
+
+/* =====================================================
    FOOTER
-================================ */
+===================================================== */
 
 footer {
-
     background: #1e293b;
 
     color: white;
@@ -716,52 +585,47 @@ footer {
     padding: 30px 20px;
 
     margin-top: 40px;
-
 }
 
 footer p {
-
     margin: 6px;
-
 }
 
 
-/* ================================
-   RESPONSIVE
-================================ */
+/* =====================================================
+   MOBILE
+===================================================== */
 
-@media(max-width: 700px) {
+@media(max-width:700px) {
 
     header h1 {
-
         font-size: 29px;
-
     }
 
     header p {
-
         font-size: 16px;
-
     }
 
     .lesson {
-
         flex-direction: column;
 
         align-items: flex-start;
-
     }
 
     .lesson-actions {
-
         width: 100%;
-
     }
 
     .lesson-actions button {
-
         flex: 1;
+    }
 
+    .nav-container {
+        justify-content: flex-start;
+    }
+
+    .section-title h2 {
+        font-size: 21px;
     }
 
 }
@@ -774,9 +638,9 @@ footer p {
 <body>
 
 
-<!-- ==========================================
+<!-- ==================================================
      HEADER
-=========================================== -->
+=================================================== -->
 
 <header>
 
@@ -789,71 +653,92 @@ footer p {
 </header>
 
 
-<!-- ==========================================
-     NAVIGATION
-=========================================== -->
+<!-- ==================================================
+     MENU
+=================================================== -->
 
-<div class="navbar">
+<nav class="navbar">
 
     <div class="nav-container">
 
         <button
             class="nav-btn"
-            onclick="showHome()">
+            onclick="goHome()">
+
             🏠 Trang chủ
+
         </button>
+
 
         <button
             class="nav-btn"
-            onclick="showLessons()">
+            onclick="goLessons()">
+
             📚 Bài học
+
         </button>
+
 
         <button
             class="nav-btn"
-            onclick="showPractice()">
+            onclick="goPractice()">
+
             📝 Luyện tập
+
         </button>
+
 
         <button
             class="nav-btn"
-            onclick="showPython()">
+            onclick="goPython()">
+
             💻 Python
+
         </button>
+
 
         <button
             class="nav-btn"
-            onclick="showAI()">
+            onclick="goAI()">
+
             🤖 Trợ lý AI
+
         </button>
+
 
         <button
             class="nav-btn"
-            onclick="showTeacher()">
+            onclick="goTeacher()">
+
             👨‍🏫 Góc giáo viên
+
         </button>
 
     </div>
 
-</div>
+</nav>
 
 
-<!-- ==========================================
+<!-- ==================================================
      CONTAINER
-=========================================== -->
+=================================================== -->
 
-<div class="container">
+<main class="container">
 
 
-<!-- ==========================================
+<!-- ==================================================
      TRANG CHỦ
-=========================================== -->
+=================================================== -->
 
-<section id="homeSection">
+<section
+    id="homePage"
+    class="page active">
 
     <div class="welcome">
 
-        <h2>🎯 KHU VỰC HỌC TẬP</h2>
+        <h2>
+            🎯 KHU VỰC HỌC TẬP
+        </h2>
 
         <p>
             Chào mừng em đến với hệ thống
@@ -866,29 +751,30 @@ footer p {
     <div class="menu">
 
 
-        <!-- BÀI HỌC -->
-
         <div class="card">
 
             <div class="card-icon">
                 📚
             </div>
 
-            <h3>Bài học</h3>
+            <h3>
+                Bài học
+            </h3>
 
             <p>
-                Học kiến thức Tin học 9
-                theo từng chủ đề và bài học.
+                Học Tin học 9 theo
+                đúng chủ đề và bài học.
             </p>
 
-            <button onclick="showLessons()">
+            <button
+                onclick="goLessons()">
+
                 Vào học
+
             </button>
 
         </div>
 
-
-        <!-- LUYỆN TẬP -->
 
         <div class="card">
 
@@ -896,21 +782,24 @@ footer p {
                 📝
             </div>
 
-            <h3>Luyện tập</h3>
+            <h3>
+                Luyện tập
+            </h3>
 
             <p>
-                Ôn tập, kiểm tra và
-                tự đánh giá kiến thức.
+                Ôn tập và tự kiểm tra
+                kiến thức.
             </p>
 
-            <button onclick="showPractice()">
+            <button
+                onclick="goPractice()">
+
                 Làm bài
+
             </button>
 
         </div>
 
-
-        <!-- PYTHON -->
 
         <div class="card">
 
@@ -918,21 +807,24 @@ footer p {
                 💻
             </div>
 
-            <h3>Lập trình</h3>
+            <h3>
+                Python
+            </h3>
 
             <p>
                 Học lập trình và
                 giải quyết bài toán.
             </p>
 
-            <button onclick="showPython()">
+            <button
+                onclick="goPython()">
+
                 Lập trình
+
             </button>
 
         </div>
 
-
-        <!-- AI -->
 
         <div class="card">
 
@@ -940,21 +832,24 @@ footer p {
                 🤖
             </div>
 
-            <h3>Trợ lý AI</h3>
+            <h3>
+                Trợ lý AI
+            </h3>
 
             <p>
-                AI hỗ trợ học tập,
-                gợi ý và giải thích.
+                Hỗ trợ học sinh
+                tự học và tự suy nghĩ.
             </p>
 
-            <button onclick="showAI()">
+            <button
+                onclick="goAI()">
+
                 Hỏi AI
+
             </button>
 
         </div>
 
-
-        <!-- TIẾN BỘ -->
 
         <div class="card">
 
@@ -962,21 +857,24 @@ footer p {
                 📊
             </div>
 
-            <h3>Tiến bộ của em</h3>
+            <h3>
+                Tiến bộ của em
+            </h3>
 
             <p>
-                Theo dõi số bài đã hoàn thành
-                và tiến độ học tập.
+                Theo dõi số bài đã
+                hoàn thành.
             </p>
 
-            <button onclick="showLessons()">
+            <button
+                onclick="goLessons()">
+
                 Xem tiến độ
+
             </button>
 
         </div>
 
-
-        <!-- GIÁO VIÊN -->
 
         <div class="card">
 
@@ -984,15 +882,20 @@ footer p {
                 👨‍🏫
             </div>
 
-            <h3>Góc giáo viên</h3>
+            <h3>
+                Góc giáo viên
+            </h3>
 
             <p>
                 Công cụ hỗ trợ giáo viên
-                quản lý việc học.
+                theo dõi học tập.
             </p>
 
-            <button onclick="showTeacher()">
+            <button
+                onclick="goTeacher()">
+
                 Mở góc giáo viên
+
             </button>
 
         </div>
@@ -1003,11 +906,13 @@ footer p {
 </section>
 
 
-<!-- ==========================================
-     KHU VỰC BÀI HỌC
-=========================================== -->
+<!-- ==================================================
+     TRANG BÀI HỌC
+=================================================== -->
 
-<section id="lessonSection">
+<section
+    id="lessonsPage"
+    class="page">
 
 
     <div class="section-title">
@@ -1017,8 +922,22 @@ footer p {
         </h2>
 
         <p>
-            Hệ thống bài học theo 6 chủ đề
+            6 chủ đề – 17 bài học
+            và các nhánh lựa chọn của Chủ đề 4
         </p>
+
+    </div>
+
+
+    <div class="button-row">
+
+        <button
+            class="btn-secondary"
+            onclick="goHome()">
+
+            🏠 Trang chủ
+
+        </button>
 
     </div>
 
@@ -1028,18 +947,18 @@ footer p {
     <div class="progress-box">
 
         <strong>
-            📊 Tiến độ học tập của em
+            📊 Tiến độ học tập
         </strong>
 
-        <div>
+        <p>
 
             Đã hoàn thành:
-            <span id="completedCount">
+            <strong id="completedCount">
                 0
-            </span>
+            </strong>
             bài
 
-        </div>
+        </p>
 
         <div class="progress-bar">
 
@@ -1062,17 +981,17 @@ footer p {
     <div class="search-box">
 
         <input
-            type="text"
             id="searchInput"
-            placeholder="🔎 Tìm bài học, chủ đề..."
+            type="text"
+            placeholder="🔎 Tìm bài học hoặc chủ đề..."
             oninput="searchLessons()">
 
     </div>
 
 
-    <!-- ======================================
+    <!-- =================================================
          CHỦ ĐỀ 1
-    ======================================= -->
+    ================================================== -->
 
     <div class="topic">
 
@@ -1084,8 +1003,7 @@ footer p {
             </h3>
 
             <p>
-                Tìm hiểu về thế giới kĩ thuật số
-                và vai trò của công nghệ.
+                Thế giới kĩ thuật số
             </p>
 
         </div>
@@ -1098,17 +1016,12 @@ footer p {
             <div class="lesson-info">
 
                 <div class="lesson-title">
-
                     Bài 1. Thế giới kĩ thuật số
-
                 </div>
 
                 <div class="lesson-description">
-
-                    Tìm hiểu những đặc điểm,
-                    vai trò và tác động của
-                    thế giới kĩ thuật số.
-
+                    Tìm hiểu về thế giới kĩ thuật số
+                    và vai trò của công nghệ.
                 </div>
 
             </div>
@@ -1129,9 +1042,9 @@ footer p {
     </div>
 
 
-    <!-- ======================================
+    <!-- =================================================
          CHỦ ĐỀ 2
-    ======================================= -->
+    ================================================== -->
 
     <div class="topic">
 
@@ -1144,8 +1057,8 @@ footer p {
             </h3>
 
             <p>
-                Khai thác và đánh giá thông tin
-                phục vụ giải quyết vấn đề.
+                Thông tin trong giải quyết vấn đề
+                và đánh giá chất lượng thông tin.
             </p>
 
         </div>
@@ -1153,13 +1066,14 @@ footer p {
 
         <div
             class="lesson"
-            data-search="bài 2 thông tin giải quyết vấn đề">
+            data-search="bài 2 thông tin trong giải quyết vấn đề">
 
             <div class="lesson-info">
 
                 <div class="lesson-title">
 
-                    Bài 2. Thông tin trong giải quyết vấn đề
+                    Bài 2.
+                    Thông tin trong giải quyết vấn đề
 
                 </div>
 
@@ -1176,7 +1090,9 @@ footer p {
 
                 <button
                     onclick="openLesson('2')">
+
                     Học bài
+
                 </button>
 
             </div>
@@ -1192,15 +1108,15 @@ footer p {
 
                 <div class="lesson-title">
 
-                    Bài 3. Thực hành:
-                    Đánh giá chất lượng thông tin
+                    Bài 3.
+                    Thực hành: Đánh giá chất lượng thông tin
 
                 </div>
 
                 <div class="lesson-description">
 
-                    Thực hành xem xét độ chính xác,
-                    tin cậy và phù hợp của thông tin.
+                    Thực hành đánh giá
+                    thông tin trên môi trường số.
 
                 </div>
 
@@ -1210,7 +1126,9 @@ footer p {
 
                 <button
                     onclick="openLesson('3')">
+
                     Học bài
+
                 </button>
 
             </div>
@@ -1220,9 +1138,9 @@ footer p {
     </div>
 
 
-    <!-- ======================================
+    <!-- =================================================
          CHỦ ĐỀ 3
-    ======================================= -->
+    ================================================== -->
 
     <div class="topic">
 
@@ -1235,8 +1153,8 @@ footer p {
             </h3>
 
             <p>
-                Sử dụng dịch vụ Internet
-                đúng pháp luật và có trách nhiệm.
+                Sử dụng Internet đúng pháp luật
+                và có trách nhiệm.
             </p>
 
         </div>
@@ -1258,9 +1176,8 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Nhận biết trách nhiệm,
-                    quyền và nghĩa vụ khi sử dụng
-                    các dịch vụ trên Internet.
+                    Nhận biết trách nhiệm
+                    khi sử dụng dịch vụ Internet.
 
                 </div>
 
@@ -1270,7 +1187,9 @@ footer p {
 
                 <button
                     onclick="openLesson('4')">
+
                     Học bài
+
                 </button>
 
             </div>
@@ -1280,9 +1199,9 @@ footer p {
     </div>
 
 
-    <!-- ======================================
+    <!-- =================================================
          CHỦ ĐỀ 4
-    ======================================= -->
+    ================================================== -->
 
     <div class="topic">
 
@@ -1294,8 +1213,9 @@ footer p {
             </h3>
 
             <p>
-                Khai thác phần mềm mô phỏng,
-                công cụ trình bày và ứng dụng tin học.
+                Phần mềm mô phỏng,
+                trình bày thông tin,
+                bảng tính và làm video.
             </p>
 
         </div>
@@ -1303,7 +1223,7 @@ footer p {
 
         <div
             class="lesson"
-            data-search="bài 5 tìm hiểu phần mềm mô phỏng">
+            data-search="bài 5 phần mềm mô phỏng">
 
             <div class="lesson-info">
 
@@ -1316,8 +1236,7 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Tìm hiểu mục đích,
-                    chức năng và khả năng
+                    Tìm hiểu vai trò và khả năng
                     của phần mềm mô phỏng.
 
                 </div>
@@ -1337,7 +1256,7 @@ footer p {
 
         <div
             class="lesson"
-            data-search="bài 6 thực hành khai thác phần mềm mô phỏng">
+            data-search="bài 6 khai thác phần mềm mô phỏng">
 
             <div class="lesson-info">
 
@@ -1350,8 +1269,7 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Thực hành sử dụng phần mềm mô phỏng
-                    để khám phá và học tập.
+                    Thực hành sử dụng phần mềm mô phỏng.
 
                 </div>
 
@@ -1370,7 +1288,7 @@ footer p {
 
         <div
             class="lesson"
-            data-search="bài 7 trình bày thông tin trao đổi hợp tác">
+            data-search="bài 7 trình bày thông tin">
 
             <div class="lesson-info">
 
@@ -1385,7 +1303,7 @@ footer p {
                 <div class="lesson-description">
 
                     Sử dụng công cụ số để trình bày
-                    và chia sẻ thông tin.
+                    và trao đổi thông tin.
 
                 </div>
 
@@ -1404,7 +1322,7 @@ footer p {
 
         <div
             class="lesson"
-            data-search="bài 8 thực hành công cụ trực quan">
+            data-search="bài 8 công cụ trực quan">
 
             <div class="lesson-info">
 
@@ -1418,7 +1336,7 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Thực hành thiết kế sản phẩm
+                    Thực hành tạo sản phẩm
                     trình bày thông tin trực quan.
 
                 </div>
@@ -1440,7 +1358,7 @@ footer p {
 
         <div class="branch-title">
 
-            📊 NHÁNH A.
+            📊 NHÁNH A –
             SỬ DỤNG BẢNG TÍNH ĐIỆN TỬ NÂNG CAO
 
         </div>
@@ -1448,7 +1366,7 @@ footer p {
 
         <div
             class="lesson"
-            data-search="bài 9a xác thực dữ liệu bảng tính">
+            data-search="bài 9a xác thực dữ liệu">
 
             <div class="lesson-info">
 
@@ -1481,7 +1399,7 @@ footer p {
 
         <div
             class="lesson"
-            data-search="bài 10a hàm countif">
+            data-search="bài 10a countif">
 
             <div class="lesson-info">
 
@@ -1494,8 +1412,7 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Sử dụng hàm COUNTIF
-                    để đếm dữ liệu theo điều kiện.
+                    Đếm dữ liệu theo điều kiện.
 
                 </div>
 
@@ -1514,7 +1431,7 @@ footer p {
 
         <div
             class="lesson"
-            data-search="bài 11a hàm sumif">
+            data-search="bài 11a sumif">
 
             <div class="lesson-info">
 
@@ -1527,8 +1444,7 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Sử dụng hàm SUMIF
-                    để tính tổng theo điều kiện.
+                    Tính tổng dữ liệu theo điều kiện.
 
                 </div>
 
@@ -1547,7 +1463,7 @@ footer p {
 
         <div
             class="lesson"
-            data-search="bài 12a hàm if">
+            data-search="bài 12a if">
 
             <div class="lesson-info">
 
@@ -1560,8 +1476,7 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Sử dụng hàm IF
-                    để xử lí các điều kiện trong bảng tính.
+                    Xử lí dữ liệu theo điều kiện.
 
                 </div>
 
@@ -1580,7 +1495,7 @@ footer p {
 
         <div
             class="lesson"
-            data-search="bài 13a quản lí tài chính gia đình">
+            data-search="bài 13a tài chính gia đình">
 
             <div class="lesson-info">
 
@@ -1594,8 +1509,8 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Vận dụng bảng tính để xây dựng
-                    sản phẩm quản lí tài chính gia đình.
+                    Vận dụng bảng tính
+                    vào quản lí tài chính.
 
                 </div>
 
@@ -1616,7 +1531,7 @@ footer p {
 
         <div class="branch-title branch-video">
 
-            🎬 NHÁNH B.
+            🎬 NHÁNH B –
             LÀM QUEN VỚI PHẦN MỀM LÀM VIDEO
 
         </div>
@@ -1624,7 +1539,7 @@ footer p {
 
         <div
             class="lesson"
-            data-search="bài 9b chức năng chính phần mềm làm video">
+            data-search="bài 9b phần mềm làm video">
 
             <div class="lesson-info">
 
@@ -1671,8 +1586,8 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Chuẩn bị hình ảnh,
-                    âm thanh và dữ liệu cho video.
+                    Chuẩn bị dữ liệu
+                    cho sản phẩm video.
 
                 </div>
 
@@ -1704,8 +1619,7 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Thực hành xây dựng video
-                    theo kịch bản đã chuẩn bị.
+                    Dựng video theo kịch bản.
 
                 </div>
 
@@ -1737,8 +1651,7 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Hoàn thiện nội dung,
-                    âm thanh và hình ảnh của video.
+                    Hoàn thiện sản phẩm video.
 
                 </div>
 
@@ -1770,8 +1683,7 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Biên tập sản phẩm
-                    và xuất video hoàn chỉnh.
+                    Biên tập và xuất video hoàn chỉnh.
 
                 </div>
 
@@ -1790,9 +1702,9 @@ footer p {
     </div>
 
 
-    <!-- ======================================
+    <!-- =================================================
          CHỦ ĐỀ 5
-    ======================================= -->
+    ================================================== -->
 
     <div class="topic">
 
@@ -1805,7 +1717,7 @@ footer p {
             </h3>
 
             <p>
-                Tư duy giải quyết vấn đề,
+                Giải quyết vấn đề,
                 bài toán tin học và lập trình.
             </p>
 
@@ -1826,8 +1738,8 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Phân tích vấn đề và xây dựng
-                    cách giải quyết bằng máy tính.
+                    Phân tích và giải quyết vấn đề
+                    với sự trợ giúp của máy tính.
 
                 </div>
 
@@ -1859,7 +1771,7 @@ footer p {
                 <div class="lesson-description">
 
                     Xác định dữ liệu vào,
-                    dữ liệu ra và cách giải quyết bài toán.
+                    dữ liệu ra và cách giải quyết.
 
                 </div>
 
@@ -1878,7 +1790,7 @@ footer p {
 
         <div
             class="lesson"
-            data-search="bài 16 lập chương trình máy tính">
+            data-search="bài 16 lập chương trình">
 
             <div class="lesson-info">
 
@@ -1891,8 +1803,8 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Vận dụng kiến thức lập trình
-                    để xây dựng chương trình giải bài toán.
+                    Xây dựng chương trình
+                    giải quyết bài toán.
 
                 </div>
 
@@ -1911,9 +1823,9 @@ footer p {
     </div>
 
 
-    <!-- ======================================
+    <!-- =================================================
          CHỦ ĐỀ 6
-    ======================================= -->
+    ================================================== -->
 
     <div class="topic">
 
@@ -1925,8 +1837,7 @@ footer p {
             </h3>
 
             <p>
-                Tìm hiểu thế giới nghề nghiệp
-                gắn với Tin học.
+                Tin học và thế giới nghề nghiệp.
             </p>
 
         </div>
@@ -1947,8 +1858,8 @@ footer p {
 
                 <div class="lesson-description">
 
-                    Khám phá các nghề nghiệp
-                    liên quan đến Tin học và công nghệ.
+                    Tìm hiểu các nghề nghiệp
+                    liên quan đến Tin học.
 
                 </div>
 
@@ -1967,89 +1878,125 @@ footer p {
     </div>
 
 
-    <!-- CHI TIẾT BÀI -->
+    <!-- =================================================
+         CHI TIẾT BÀI
+    ================================================== -->
 
-    <div id="lessonDetail">
+    <div
+        id="lessonDetail"
+        class="detail-box">
 
         <div class="detail-header">
 
-            <h2 id="detailTitle"></h2>
+            <h2 id="detailTitle">
+            </h2>
 
-            <p id="detailIntro"></p>
+            <p id="detailIntro">
+            </p>
 
         </div>
 
 
         <div class="info-box">
 
-            <h3>🎯 Mục tiêu học tập</h3>
+            <h3>
+                🎯 Mục tiêu học tập
+            </h3>
 
-            <p id="detailGoal"></p>
+            <p id="detailGoal">
+            </p>
 
         </div>
 
 
-        <h3>📖 Nội dung trọng tâm</h3>
+        <h3>
+            📖 Nội dung trọng tâm
+        </h3>
 
-        <p id="detailContent"></p>
+        <p id="detailContent">
+        </p>
 
 
         <div class="remember-box">
 
-            <h3>💡 Em cần nhớ</h3>
+            <h3>
+                💡 Em cần nhớ
+            </h3>
 
-            <p id="detailRemember"></p>
+            <p id="detailRemember">
+            </p>
 
         </div>
 
 
         <div class="challenge-box">
 
-            <h3>🧠 Thử thách</h3>
+            <h3>
+                🧠 Thử thách
+            </h3>
 
-            <p id="detailChallenge"></p>
+            <p id="detailChallenge">
+            </p>
 
         </div>
 
 
-        <button
-            class="btn-success"
-            id="completeButton"
-            onclick="completeCurrentLesson()">
+        <div class="button-row">
 
-            ✅ Đánh dấu đã hoàn thành
+            <button
+                id="completeButton"
+                class="btn-success"
+                onclick="completeCurrentLesson()">
 
-        </button>
+                ✅ Đánh dấu đã hoàn thành
 
+            </button>
+
+
+            <button
+                class="btn-secondary"
+                onclick="backToLessonList()">
+
+                ← Quay lại danh sách bài
+
+            </button>
+
+
+            <button
+                onclick="goHome()">
+
+                🏠 Trang chủ
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="button-row">
 
         <button
             class="btn-secondary"
-            onclick="closeLessonDetail()">
+            onclick="goHome()">
 
-            ← Quay lại danh sách bài
+            🏠 Về trang chủ
 
         </button>
 
     </div>
 
 
-    <button
-        class="btn-secondary"
-        onclick="showHome()">
-
-        🏠 Về trang chủ
-
-    </button>
-
-
 </section>
 
 
-<!-- ==========================================
-     KHU VỰC LUYỆN TẬP
-=========================================== -->
+<!-- ==================================================
+     LUYỆN TẬP
+=================================================== -->
 
-<section id="practiceSection">
+<section
+    id="practicePage"
+    class="page">
 
     <div class="feature-page">
 
@@ -2062,37 +2009,45 @@ footer p {
         </h2>
 
         <p>
+            Hệ thống luyện tập sẽ giúp học sinh
+            kiểm tra mức độ hiểu bài.
+        </p>
 
-            Hệ thống câu hỏi trắc nghiệm,
-            đúng – sai và bài tập thực hành
+        <div class="notice">
+
+            🚧 Phần ngân hàng câu hỏi
             sẽ được xây dựng ở bước tiếp theo.
 
-        </p>
+        </div>
 
-        <p>
+        <div class="button-row">
 
-            🎯 Mục tiêu:
-            giúp học sinh tự kiểm tra
-            mức độ hiểu bài.
+            <button onclick="goLessons()">
+                📚 Chọn bài học
+            </button>
 
-        </p>
+            <button
+                class="btn-secondary"
+                onclick="goHome()">
 
-        <button onclick="showLessons()">
+                🏠 Trang chủ
 
-            📚 Chọn bài để học
+            </button>
 
-        </button>
+        </div>
 
     </div>
 
 </section>
 
 
-<!-- ==========================================
+<!-- ==================================================
      PYTHON
-=========================================== -->
+=================================================== -->
 
-<section id="pythonSection">
+<section
+    id="pythonPage"
+    class="page">
 
     <div class="feature-page">
 
@@ -2101,22 +2056,12 @@ footer p {
         </div>
 
         <h2>
-            KHU VỰC LẬP TRÌNH
+            PHÒNG THỰC HÀNH LẬP TRÌNH
         </h2>
 
         <p>
-
             Khu vực này sẽ được phát triển
-            thành phòng thực hành lập trình.
-
-        </p>
-
-        <p>
-
-            Học sinh sẽ có thể:
-            viết chương trình,
-            chạy thử và sửa lỗi.
-
+            thành phòng thực hành Python.
         </p>
 
         <div class="info-box">
@@ -2126,30 +2071,40 @@ footer p {
             </h3>
 
             <p>
-
-                Phần thực hành Python
-                sẽ được tích hợp ở phiên bản tiếp theo.
-
+                Học sinh có thể viết chương trình,
+                chạy thử, phát hiện và sửa lỗi.
             </p>
 
         </div>
 
-        <button onclick="showLessons()">
+        <div class="button-row">
 
-            📚 Quay lại bài học
+            <button onclick="goLessons()">
+                📚 Bài học
+            </button>
 
-        </button>
+            <button
+                class="btn-secondary"
+                onclick="goHome()">
+
+                🏠 Trang chủ
+
+            </button>
+
+        </div>
 
     </div>
 
 </section>
 
 
-<!-- ==========================================
+<!-- ==================================================
      AI
-=========================================== -->
+=================================================== -->
 
-<section id="aiSection">
+<section
+    id="aiPage"
+    class="page">
 
     <div class="feature-page">
 
@@ -2162,69 +2117,69 @@ footer p {
         </h2>
 
         <p>
-
-            AI sẽ được thiết kế để
-            <strong>hỗ trợ học sinh tự suy nghĩ</strong>,
+            AI hỗ trợ học sinh tự suy nghĩ,
             không làm bài thay học sinh.
-
         </p>
-
 
         <div class="info-box">
 
             <h3>
-                💡 Cách AI hỗ trợ
+                💡 AI có thể hỗ trợ
             </h3>
 
             <p>
 
-                • Gợi ý từng bước<br>
-
                 • Giải thích khái niệm khó<br>
-
+                • Gợi ý từng bước<br>
                 • Phân tích lỗi chương trình<br>
-
                 • Đưa ra câu hỏi gợi mở<br>
-
-                • Hướng dẫn học sinh tự tìm lời giải
+                • Hướng dẫn tự tìm lời giải
 
             </p>
 
         </div>
-
 
         <div class="challenge-box">
 
             <h3>
-                ⚠️ Nguyên tắc
+                ⚠️ Nguyên tắc sử dụng AI
             </h3>
 
             <p>
-
                 Học sinh cần tự suy nghĩ
-                trước khi nhận gợi ý từ AI.
-
+                trước khi sử dụng gợi ý của AI.
             </p>
 
         </div>
 
+        <div class="button-row">
 
-        <button onclick="showLessons()">
+            <button onclick="goLessons()">
+                📚 Bài học
+            </button>
 
-            📚 Quay lại bài học
+            <button
+                class="btn-secondary"
+                onclick="goHome()">
 
-        </button>
+                🏠 Trang chủ
+
+            </button>
+
+        </div>
 
     </div>
 
 </section>
 
 
-<!-- ==========================================
+<!-- ==================================================
      GÓC GIÁO VIÊN
-=========================================== -->
+=================================================== -->
 
-<section id="teacherSection">
+<section
+    id="teacherPage"
+    class="page">
 
     <div class="feature-page">
 
@@ -2235,7 +2190,6 @@ footer p {
         <h2>
             GÓC GIÁO VIÊN
         </h2>
-
 
         <div class="teacher-box">
 
@@ -2260,8 +2214,8 @@ footer p {
                 </strong>
 
                 <p>
-                    Học sinh có khả năng
-                    vận dụng và mở rộng kiến thức.
+                    Có khả năng vận dụng
+                    và mở rộng kiến thức.
                 </p>
 
             </div>
@@ -2274,8 +2228,8 @@ footer p {
                 </strong>
 
                 <p>
-                    Học sinh đạt yêu cầu
-                    cơ bản của bài học.
+                    Đạt yêu cầu cơ bản
+                    của bài học.
                 </p>
 
             </div>
@@ -2288,23 +2242,8 @@ footer p {
                 </strong>
 
                 <p>
-                    Học sinh cần được
-                    hướng dẫn và củng cố thêm.
-                </p>
-
-            </div>
-
-
-            <div class="teacher-item">
-
-                <strong>
-                    📈 Thống kê theo chủ đề
-                </strong>
-
-                <p>
-                    Phiên bản tiếp theo sẽ
-                    thống kê kết quả theo
-                    chủ đề và từng lớp.
+                    Cần được hướng dẫn
+                    và củng cố thêm.
                 </p>
 
             </div>
@@ -2312,23 +2251,33 @@ footer p {
         </div>
 
 
-        <button onclick="showHome()">
+        <div class="button-row">
 
-            🏠 Trang chủ
+            <button onclick="goLessons()">
+                📚 Xem bài học
+            </button>
 
-        </button>
+            <button
+                class="btn-secondary"
+                onclick="goHome()">
+
+                🏠 Trang chủ
+
+            </button>
+
+        </div>
 
     </div>
 
 </section>
 
 
-</div>
+</main>
 
 
-<!-- ==========================================
+<!-- ==================================================
      FOOTER
-=========================================== -->
+=================================================== -->
 
 <footer>
 
@@ -2349,621 +2298,455 @@ footer p {
 
 <script>
 
-/* ==========================================
+/* =====================================================
    DỮ LIỆU BÀI HỌC
-=========================================== */
+===================================================== */
 
 const lessons = {
 
     "1": {
-
-        title:
-        "Bài 1. Thế giới kĩ thuật số",
-
-        intro:
-        "Khám phá thế giới kĩ thuật số và vai trò của công nghệ số trong đời sống.",
-
-        goal:
-        "Nhận biết được những đặc điểm của thế giới kĩ thuật số và vai trò của công nghệ số.",
-
-        content:
-        "Tìm hiểu sự phát triển của công nghệ số, các sản phẩm và dịch vụ số, cũng như tác động của công nghệ đối với học tập, lao động và đời sống.",
-
-        remember:
-        "Công nghệ số đang thay đổi cách con người học tập, làm việc, giao tiếp và giải trí.",
-
-        challenge:
-        "Hãy nêu ba ví dụ về việc công nghệ số đang được sử dụng trong học tập và đời sống."
+        title: "Bài 1. Thế giới kĩ thuật số",
+        intro: "Tìm hiểu thế giới kĩ thuật số và vai trò của công nghệ số.",
+        goal: "Nhận biết đặc điểm và vai trò của công nghệ số trong đời sống.",
+        content: "Tìm hiểu sự phát triển của công nghệ số và tác động của công nghệ số đối với học tập, lao động và đời sống.",
+        remember: "Công nghệ số đang thay đổi cách con người học tập, làm việc, giao tiếp và giải trí.",
+        challenge: "Hãy nêu ba ví dụ về việc công nghệ số được sử dụng trong học tập."
     },
-
 
     "2": {
-
-        title:
-        "Bài 2. Thông tin trong giải quyết vấn đề",
-
-        intro:
-        "Tìm hiểu vai trò của thông tin trong quá trình giải quyết vấn đề.",
-
-        goal:
-        "Biết xác định nhu cầu thông tin và lựa chọn thông tin phù hợp với vấn đề cần giải quyết.",
-
-        content:
-        "Thông tin có vai trò quan trọng trong việc xác định, phân tích và đưa ra phương án giải quyết vấn đề.",
-
-        remember:
-        "Thông tin chỉ thực sự có giá trị khi phù hợp, chính xác, đầy đủ và được sử dụng đúng mục đích.",
-
-        challenge:
-        "Hãy đưa ra một tình huống học tập cần tìm kiếm và lựa chọn thông tin để giải quyết."
+        title: "Bài 2. Thông tin trong giải quyết vấn đề",
+        intro: "Tìm hiểu vai trò của thông tin trong giải quyết vấn đề.",
+        goal: "Biết xác định nhu cầu và lựa chọn thông tin phù hợp.",
+        content: "Thông tin có vai trò quan trọng trong xác định, phân tích và đưa ra phương án giải quyết vấn đề.",
+        remember: "Thông tin cần phù hợp, chính xác, đầy đủ và được sử dụng đúng mục đích.",
+        challenge: "Nêu một tình huống cần tìm kiếm và lựa chọn thông tin để giải quyết."
     },
-
 
     "3": {
-
-        title:
-        "Bài 3. Thực hành: Đánh giá chất lượng thông tin",
-
-        intro:
-        "Thực hành đánh giá chất lượng thông tin tìm được trên môi trường số.",
-
-        goal:
-        "Biết xem xét nguồn, độ tin cậy, tính chính xác và mức độ phù hợp của thông tin.",
-
-        content:
-        "Học sinh thực hành so sánh các nguồn thông tin và nhận biết những dấu hiệu của thông tin thiếu tin cậy.",
-
-        remember:
-        "Không nên tin ngay vào một thông tin trên Internet. Cần kiểm tra nguồn và đối chiếu thông tin.",
-
-        challenge:
-        "Chọn một thông tin trên Internet và xác định ít nhất ba tiêu chí để kiểm tra độ tin cậy."
+        title: "Bài 3. Thực hành: Đánh giá chất lượng thông tin",
+        intro: "Thực hành đánh giá chất lượng thông tin trên môi trường số.",
+        goal: "Biết xem xét nguồn, độ tin cậy, tính chính xác và phù hợp của thông tin.",
+        content: "Thực hành so sánh các nguồn thông tin và nhận biết dấu hiệu của thông tin thiếu tin cậy.",
+        remember: "Không nên tin ngay một thông tin trên Internet; cần kiểm tra nguồn và đối chiếu.",
+        challenge: "Chọn một thông tin trên Internet và nêu ba tiêu chí để kiểm tra độ tin cậy."
     },
-
 
     "4": {
-
-        title:
-        "Bài 4. Một số vấn đề pháp lí về sử dụng dịch vụ Internet",
-
-        intro:
-        "Tìm hiểu những vấn đề pháp lí khi sử dụng Internet.",
-
-        goal:
-        "Nhận biết trách nhiệm của người sử dụng Internet và hình thành hành vi sử dụng dịch vụ số có trách nhiệm.",
-
-        content:
-        "Tìm hiểu quyền, trách nhiệm và những hành vi cần tránh khi sử dụng các dịch vụ Internet.",
-
-        remember:
-        "Sử dụng Internet cần tuân thủ pháp luật, tôn trọng quyền riêng tư và quyền của người khác.",
-
-        challenge:
-        "Hãy nêu một số hành vi trên Internet mà học sinh cần tránh."
+        title: "Bài 4. Một số vấn đề pháp lí về sử dụng dịch vụ Internet",
+        intro: "Tìm hiểu những vấn đề pháp lí khi sử dụng Internet.",
+        goal: "Nhận biết trách nhiệm và hành vi cần có khi sử dụng dịch vụ Internet.",
+        content: "Tìm hiểu quyền, trách nhiệm và những hành vi cần tránh khi sử dụng các dịch vụ Internet.",
+        remember: "Sử dụng Internet cần tuân thủ pháp luật và tôn trọng quyền của người khác.",
+        challenge: "Nêu một số hành vi trên Internet mà học sinh cần tránh."
     },
-
 
     "5": {
-
-        title:
-        "Bài 5. Tìm hiểu phần mềm mô phỏng",
-
-        intro:
-        "Khám phá vai trò và khả năng của phần mềm mô phỏng.",
-
-        goal:
-        "Nhận biết được phần mềm mô phỏng và hiểu cách sử dụng mô phỏng trong học tập.",
-
-        content:
-        "Phần mềm mô phỏng cho phép người dùng quan sát hoặc tương tác với những hiện tượng, quá trình hoặc mô hình.",
-
-        remember:
-        "Mô phỏng giúp người học quan sát và thử nghiệm những tình huống khó thực hiện trực tiếp.",
-
-        challenge:
-        "Hãy tìm một phần mềm mô phỏng có thể sử dụng trong học tập."
+        title: "Bài 5. Tìm hiểu phần mềm mô phỏng",
+        intro: "Khám phá vai trò và khả năng của phần mềm mô phỏng.",
+        goal: "Nhận biết phần mềm mô phỏng và hiểu cách sử dụng trong học tập.",
+        content: "Phần mềm mô phỏng cho phép quan sát hoặc tương tác với hiện tượng, quá trình hoặc mô hình.",
+        remember: "Mô phỏng giúp người học quan sát và thử nghiệm những tình huống khó thực hiện trực tiếp.",
+        challenge: "Hãy tìm một phần mềm mô phỏng có thể sử dụng trong học tập."
     },
-
 
     "6": {
-
-        title:
-        "Bài 6. Thực hành: Khai thác phần mềm mô phỏng",
-
-        intro:
-        "Thực hành khai thác một phần mềm mô phỏng phục vụ học tập.",
-
-        goal:
-        "Biết sử dụng các chức năng cơ bản của phần mềm mô phỏng và rút ra nhận xét.",
-
-        content:
-        "Học sinh thao tác với mô phỏng, thay đổi tham số và quan sát kết quả.",
-
-        remember:
-        "Cần xác định mục tiêu trước khi sử dụng mô phỏng và ghi nhận kết quả quan sát được.",
-
-        challenge:
-        "Thử thay đổi một tham số trong mô phỏng và mô tả sự thay đổi của kết quả."
+        title: "Bài 6. Thực hành: Khai thác phần mềm mô phỏng",
+        intro: "Thực hành khai thác phần mềm mô phỏng.",
+        goal: "Biết sử dụng chức năng cơ bản của phần mềm mô phỏng và rút ra nhận xét.",
+        content: "Thao tác với mô phỏng, thay đổi tham số và quan sát kết quả.",
+        remember: "Cần xác định mục tiêu trước khi sử dụng mô phỏng.",
+        challenge: "Thay đổi một tham số trong mô phỏng và mô tả sự thay đổi."
     },
-
 
     "7": {
-
-        title:
-        "Bài 7. Trình bày thông tin trong trao đổi và hợp tác",
-
-        intro:
-        "Sử dụng công cụ số để trình bày thông tin trong trao đổi và hợp tác.",
-
-        goal:
-        "Biết lựa chọn công cụ và cách trình bày thông tin phù hợp với mục đích giao tiếp.",
-
-        content:
-        "Tìm hiểu cách tổ chức nội dung, hình ảnh và các thành phần trực quan để truyền đạt thông tin hiệu quả.",
-
-        remember:
-        "Một sản phẩm số tốt cần rõ nội dung, hợp lí về bố cục và phù hợp với đối tượng tiếp nhận.",
-
-        challenge:
-        "Thiết kế ý tưởng một sản phẩm số giới thiệu một hoạt động của lớp."
+        title: "Bài 7. Trình bày thông tin trong trao đổi và hợp tác",
+        intro: "Sử dụng công cụ số để trình bày thông tin.",
+        goal: "Biết lựa chọn công cụ và cách trình bày phù hợp.",
+        content: "Tổ chức nội dung, hình ảnh và thành phần trực quan để truyền đạt thông tin hiệu quả.",
+        remember: "Sản phẩm số cần rõ nội dung, hợp lí về bố cục và phù hợp đối tượng.",
+        challenge: "Thiết kế ý tưởng một sản phẩm số giới thiệu hoạt động của lớp."
     },
-
 
     "8": {
-
-        title:
-        "Bài 8. Thực hành: Sử dụng công cụ trực quan trình bày thông tin trong trao đổi và hợp tác",
-
-        intro:
-        "Thực hành tạo sản phẩm trực quan phục vụ trao đổi và hợp tác.",
-
-        goal:
-        "Biết sử dụng công cụ trực quan để tạo sản phẩm trình bày thông tin.",
-
-        content:
-        "Học sinh xây dựng một sản phẩm số, tổ chức thông tin và trình bày sản phẩm.",
-
-        remember:
-        "Sản phẩm trực quan cần có thông tin chính xác, bố cục rõ ràng và hình thức phù hợp.",
-
-        challenge:
-        "Tạo một sản phẩm trực quan giới thiệu một chủ đề học tập mà em yêu thích."
+        title: "Bài 8. Thực hành: Sử dụng công cụ trực quan trình bày thông tin trong trao đổi và hợp tác",
+        intro: "Thực hành tạo sản phẩm trực quan.",
+        goal: "Biết sử dụng công cụ trực quan để tạo sản phẩm trình bày thông tin.",
+        content: "Xây dựng sản phẩm số, tổ chức thông tin và trình bày sản phẩm.",
+        remember: "Sản phẩm trực quan cần chính xác, rõ ràng và phù hợp.",
+        challenge: "Tạo một sản phẩm trực quan giới thiệu một chủ đề học tập."
     },
-
 
     "9a": {
-
-        title:
-        "Bài 9a. Sử dụng công cụ xác thực dữ liệu",
-
-        intro:
-        "Làm quen với công cụ xác thực dữ liệu trong bảng tính.",
-
-        goal:
-        "Biết sử dụng xác thực dữ liệu để kiểm soát dữ liệu nhập vào bảng tính.",
-
-        content:
-        "Tìm hiểu cách thiết lập điều kiện nhằm hạn chế dữ liệu nhập sai hoặc không phù hợp.",
-
-        remember:
-        "Xác thực dữ liệu giúp nâng cao tính chính xác và nhất quán của bảng tính.",
-
-        challenge:
-        "Tạo một ô chỉ cho phép người dùng lựa chọn dữ liệu từ danh sách."
+        title: "Bài 9a. Sử dụng công cụ xác thực dữ liệu",
+        intro: "Làm quen với công cụ xác thực dữ liệu trong bảng tính.",
+        goal: "Biết sử dụng xác thực dữ liệu để kiểm soát dữ liệu nhập vào.",
+        content: "Thiết lập điều kiện nhằm hạn chế dữ liệu nhập sai hoặc không phù hợp.",
+        remember: "Xác thực dữ liệu giúp nâng cao tính chính xác của bảng tính.",
+        challenge: "Tạo một ô chỉ cho phép lựa chọn dữ liệu từ danh sách."
     },
-
 
     "10a": {
-
-        title:
-        "Bài 10a. Sử dụng hàm COUNTIF",
-
-        intro:
-        "Sử dụng hàm COUNTIF để đếm dữ liệu theo điều kiện.",
-
-        goal:
-        "Hiểu cú pháp và vận dụng COUNTIF trong các bài toán bảng tính.",
-
-        content:
-        "Hàm COUNTIF giúp đếm số ô thỏa mãn một điều kiện xác định.",
-
-        remember:
-        "COUNTIF thường được sử dụng khi cần đếm dữ liệu theo một tiêu chí.",
-
-        challenge:
-        "Tạo bảng điểm và đếm số học sinh đạt một mức điểm xác định."
+        title: "Bài 10a. Sử dụng hàm COUNTIF",
+        intro: "Sử dụng COUNTIF để đếm dữ liệu theo điều kiện.",
+        goal: "Hiểu cú pháp và vận dụng COUNTIF.",
+        content: "COUNTIF giúp đếm số ô thỏa mãn một điều kiện xác định.",
+        remember: "COUNTIF thường dùng khi cần đếm dữ liệu theo một tiêu chí.",
+        challenge: "Tạo bảng điểm và đếm số học sinh đạt một mức điểm."
     },
-
 
     "11a": {
-
-        title:
-        "Bài 11a. Sử dụng hàm SUMIF",
-
-        intro:
-        "Sử dụng hàm SUMIF để tính tổng theo điều kiện.",
-
-        goal:
-        "Biết vận dụng SUMIF trong các bài toán tính tổng có điều kiện.",
-
-        content:
-        "Hàm SUMIF cho phép tính tổng những giá trị thỏa mãn điều kiện.",
-
-        remember:
-        "SUMIF hữu ích khi cần tổng hợp dữ liệu theo từng nhóm hoặc tiêu chí.",
-
-        challenge:
-        "Tạo bảng chi tiêu và tính tổng chi phí của một nhóm khoản chi."
+        title: "Bài 11a. Sử dụng hàm SUMIF",
+        intro: "Sử dụng SUMIF để tính tổng theo điều kiện.",
+        goal: "Biết vận dụng SUMIF trong bài toán tính tổng có điều kiện.",
+        content: "SUMIF cho phép tính tổng những giá trị thỏa mãn điều kiện.",
+        remember: "SUMIF hữu ích khi tổng hợp dữ liệu theo nhóm hoặc tiêu chí.",
+        challenge: "Tạo bảng chi tiêu và tính tổng theo nhóm khoản chi."
     },
-
 
     "12a": {
-
-        title:
-        "Bài 12a. Sử dụng hàm IF",
-
-        intro:
-        "Sử dụng hàm IF để xử lí dữ liệu theo điều kiện.",
-
-        goal:
-        "Biết xây dựng công thức có điều kiện bằng hàm IF.",
-
-        content:
-        "Hàm IF giúp lựa chọn kết quả dựa trên việc một điều kiện đúng hay sai.",
-
-        remember:
-        "IF thường được sử dụng để phân loại hoặc đưa ra kết quả phụ thuộc điều kiện.",
-
-        challenge:
-        "Viết công thức phân loại học sinh theo mức điểm."
+        title: "Bài 12a. Sử dụng hàm IF",
+        intro: "Sử dụng IF để xử lí dữ liệu theo điều kiện.",
+        goal: "Biết xây dựng công thức có điều kiện bằng IF.",
+        content: "IF lựa chọn kết quả dựa trên việc một điều kiện đúng hay sai.",
+        remember: "IF thường dùng để phân loại hoặc đưa ra kết quả phụ thuộc điều kiện.",
+        challenge: "Viết công thức phân loại học sinh theo mức điểm."
     },
-
 
     "13a": {
-
-        title:
-        "Bài 13a. Hoàn thiện bảng tính quản lí tài chính gia đình",
-
-        intro:
-        "Vận dụng kiến thức bảng tính để xây dựng sản phẩm quản lí tài chính gia đình.",
-
-        goal:
-        "Kết hợp các công cụ bảng tính để tạo sản phẩm có ý nghĩa thực tế.",
-
-        content:
-        "Xây dựng bảng theo dõi thu nhập, chi tiêu và tổng hợp dữ liệu phục vụ quản lí tài chính.",
-
-        remember:
-        "Bảng tính có thể giúp tổ chức, tính toán và phân tích dữ liệu tài chính.",
-
-        challenge:
-        "Thiết kế một bảng tính theo dõi chi tiêu gia đình trong một tháng."
+        title: "Bài 13a. Hoàn thiện bảng tính quản lí tài chính gia đình",
+        intro: "Vận dụng bảng tính để xây dựng sản phẩm quản lí tài chính gia đình.",
+        goal: "Kết hợp các công cụ bảng tính để tạo sản phẩm thực tế.",
+        content: "Xây dựng bảng theo dõi thu nhập, chi tiêu và tổng hợp dữ liệu.",
+        remember: "Bảng tính giúp tổ chức, tính toán và phân tích dữ liệu tài chính.",
+        challenge: "Thiết kế bảng theo dõi chi tiêu gia đình trong một tháng."
     },
-
 
     "9b": {
-
-        title:
-        "Bài 9b. Các chức năng chính của phần mềm làm video",
-
-        intro:
-        "Làm quen với những chức năng cơ bản của phần mềm làm video.",
-
-        goal:
-        "Nhận biết các thành phần và thao tác cơ bản khi xây dựng video.",
-
-        content:
-        "Tìm hiểu cách nhập dữ liệu, sắp xếp nội dung, chỉnh sửa và tạo sản phẩm video.",
-
-        remember:
-        "Một video được tạo từ nhiều thành phần như hình ảnh, video clip, âm thanh và văn bản.",
-
-        challenge:
-        "Khảo sát một phần mềm làm video và xác định ít nhất năm chức năng."
+        title: "Bài 9b. Các chức năng chính của phần mềm làm video",
+        intro: "Làm quen với chức năng cơ bản của phần mềm làm video.",
+        goal: "Nhận biết các thành phần và thao tác cơ bản khi xây dựng video.",
+        content: "Tìm hiểu cách nhập dữ liệu, sắp xếp nội dung và chỉnh sửa video.",
+        remember: "Video có thể gồm hình ảnh, video clip, âm thanh và văn bản.",
+        challenge: "Khảo sát một phần mềm làm video và xác định năm chức năng."
     },
-
 
     "10b": {
-
-        title:
-        "Bài 10b. Chuẩn bị dữ liệu và dựng video",
-
-        intro:
-        "Chuẩn bị dữ liệu và bắt đầu xây dựng video.",
-
-        goal:
-        "Biết tổ chức hình ảnh, âm thanh và các dữ liệu cần thiết trước khi dựng video.",
-
-        content:
-        "Chuẩn bị tài nguyên và sắp xếp chúng theo ý tưởng hoặc kịch bản.",
-
-        remember:
-        "Chuẩn bị dữ liệu tốt giúp quá trình dựng video nhanh và hiệu quả hơn.",
-
-        challenge:
-        "Lập danh sách dữ liệu cần chuẩn bị cho một video giới thiệu trường học."
+        title: "Bài 10b. Chuẩn bị dữ liệu và dựng video",
+        intro: "Chuẩn bị dữ liệu và bắt đầu xây dựng video.",
+        goal: "Biết tổ chức hình ảnh, âm thanh và dữ liệu trước khi dựng video.",
+        content: "Chuẩn bị tài nguyên và sắp xếp chúng theo ý tưởng hoặc kịch bản.",
+        remember: "Chuẩn bị dữ liệu tốt giúp quá trình dựng video hiệu quả hơn.",
+        challenge: "Lập danh sách dữ liệu cho một video giới thiệu trường học."
     },
-
 
     "11b": {
-
-        title:
-        "Bài 11b. Thực hành: Dựng video theo kịch bản",
-
-        intro:
-        "Thực hành dựng video theo một kịch bản đã chuẩn bị.",
-
-        goal:
-        "Biết sắp xếp dữ liệu và tạo video theo trình tự của kịch bản.",
-
-        content:
-        "Đưa dữ liệu vào phần mềm, sắp xếp các đoạn nội dung và điều chỉnh thời lượng.",
-
-        remember:
-        "Kịch bản giúp định hướng nội dung, trình tự và thời lượng của video.",
-
-        challenge:
-        "Dựng một video ngắn theo kịch bản gồm mở đầu, nội dung và kết thúc."
+        title: "Bài 11b. Thực hành: Dựng video theo kịch bản",
+        intro: "Thực hành dựng video theo kịch bản.",
+        goal: "Biết sắp xếp dữ liệu và tạo video theo trình tự.",
+        content: "Đưa dữ liệu vào phần mềm, sắp xếp nội dung và điều chỉnh thời lượng.",
+        remember: "Kịch bản định hướng nội dung, trình tự và thời lượng.",
+        challenge: "Dựng video ngắn gồm mở đầu, nội dung và kết thúc."
     },
-
 
     "12b": {
-
-        title:
-        "Bài 12b. Hoàn thành việc dựng video",
-
-        intro:
-        "Hoàn thiện nội dung và hình thức của sản phẩm video.",
-
-        goal:
-        "Biết kiểm tra, chỉnh sửa và hoàn thiện video.",
-
-        content:
-        "Kiểm tra sự phù hợp giữa hình ảnh, âm thanh, văn bản và nội dung của video.",
-
-        remember:
-        "Trước khi xuất video cần xem lại toàn bộ sản phẩm và sửa các lỗi phát hiện được.",
-
-        challenge:
-        "Xem lại một video đã dựng và lập danh sách những điểm cần cải thiện."
+        title: "Bài 12b. Hoàn thành việc dựng video",
+        intro: "Hoàn thiện nội dung và hình thức sản phẩm video.",
+        goal: "Biết kiểm tra, chỉnh sửa và hoàn thiện video.",
+        content: "Kiểm tra sự phù hợp giữa hình ảnh, âm thanh, văn bản và nội dung.",
+        remember: "Cần xem lại toàn bộ sản phẩm trước khi xuất.",
+        challenge: "Xem lại một video và lập danh sách điểm cần cải thiện."
     },
-
 
     "13b": {
-
-        title:
-        "Bài 13b. Biên tập và xuất video",
-
-        intro:
-        "Biên tập sản phẩm và xuất video hoàn chỉnh.",
-
-        goal:
-        "Biết hoàn thiện sản phẩm và lựa chọn thiết lập phù hợp khi xuất video.",
-
-        content:
-        "Thực hiện các thao tác chỉnh sửa cuối cùng và xuất sản phẩm video.",
-
-        remember:
-        "Sản phẩm cần được kiểm tra trước khi xuất để đảm bảo chất lượng và tính phù hợp.",
-
-        challenge:
-        "Xuất một video hoàn chỉnh và kiểm tra lại sản phẩm sau khi xuất."
+        title: "Bài 13b. Biên tập và xuất video",
+        intro: "Biên tập sản phẩm và xuất video hoàn chỉnh.",
+        goal: "Biết hoàn thiện sản phẩm và lựa chọn thiết lập khi xuất video.",
+        content: "Thực hiện chỉnh sửa cuối cùng và xuất sản phẩm.",
+        remember: "Cần kiểm tra sản phẩm trước khi xuất.",
+        challenge: "Xuất video hoàn chỉnh và kiểm tra lại sản phẩm."
     },
-
 
     "14": {
-
-        title:
-        "Bài 14. Giải quyết vấn đề",
-
-        intro:
-        "Tìm hiểu cách tiếp cận và giải quyết vấn đề với sự trợ giúp của máy tính.",
-
-        goal:
-        "Biết phân tích vấn đề và xác định hướng giải quyết.",
-
-        content:
-        "Quá trình giải quyết vấn đề gồm xác định vấn đề, phân tích dữ liệu, xây dựng cách giải quyết và kiểm tra kết quả.",
-
-        remember:
-        "Muốn giải quyết vấn đề tốt cần hiểu rõ yêu cầu trước khi lựa chọn công cụ hoặc thuật toán.",
-
-        challenge:
-        "Chọn một vấn đề thực tế và mô tả các bước để giải quyết vấn đề đó."
+        title: "Bài 14. Giải quyết vấn đề",
+        intro: "Tìm hiểu cách giải quyết vấn đề với sự trợ giúp của máy tính.",
+        goal: "Biết phân tích vấn đề và xác định hướng giải quyết.",
+        content: "Xác định vấn đề, phân tích dữ liệu, xây dựng cách giải quyết và kiểm tra kết quả.",
+        remember: "Muốn giải quyết vấn đề tốt cần hiểu rõ yêu cầu trước.",
+        challenge: "Chọn một vấn đề thực tế và mô tả các bước giải quyết."
     },
-
 
     "15": {
-
-        title:
-        "Bài 15. Bài toán tin học",
-
-        intro:
-        "Tìm hiểu cách mô tả một bài toán để máy tính có thể xử lí.",
-
-        goal:
-        "Xác định được dữ liệu vào, dữ liệu ra và cách giải quyết bài toán.",
-
-        content:
-        "Bài toán tin học cần được mô tả rõ ràng để có thể xây dựng thuật toán và chương trình.",
-
-        remember:
-        "Khi phân tích bài toán cần xác định Input, Output và phương pháp xử lí.",
-
-        challenge:
-        "Hãy mô tả Input và Output của một bài toán tính điểm trung bình."
+        title: "Bài 15. Bài toán tin học",
+        intro: "Tìm hiểu cách mô tả bài toán để máy tính xử lí.",
+        goal: "Xác định dữ liệu vào, dữ liệu ra và cách giải quyết.",
+        content: "Bài toán tin học cần được mô tả rõ để xây dựng thuật toán và chương trình.",
+        remember: "Khi phân tích bài toán cần xác định Input, Output và phương pháp xử lí.",
+        challenge: "Mô tả Input và Output của bài toán tính điểm trung bình."
     },
-
 
     "16": {
-
-        title:
-        "Bài 16. Thực hành: Lập chương trình máy tính",
-
-        intro:
-        "Thực hành xây dựng chương trình để giải quyết bài toán.",
-
-        goal:
-        "Biết chuyển cách giải bài toán thành chương trình máy tính.",
-
-        content:
-        "Học sinh thực hành xây dựng chương trình, chạy thử, phát hiện và sửa lỗi.",
-
-        remember:
-        "Một chương trình tốt cần đúng yêu cầu, dễ hiểu và được kiểm tra bằng nhiều trường hợp.",
-
-        challenge:
-        "Viết một chương trình đơn giản giải quyết một bài toán mà em tự lựa chọn."
+        title: "Bài 16. Thực hành: Lập chương trình máy tính",
+        intro: "Thực hành xây dựng chương trình giải quyết bài toán.",
+        goal: "Biết chuyển cách giải thành chương trình máy tính.",
+        content: "Xây dựng chương trình, chạy thử, phát hiện và sửa lỗi.",
+        remember: "Chương trình cần đúng yêu cầu và được kiểm tra bằng nhiều trường hợp.",
+        challenge: "Viết một chương trình đơn giản giải quyết một bài toán."
     },
 
-
     "17": {
-
-        title:
-        "Bài 17. Tin học và thế giới nghề nghiệp",
-
-        intro:
-        "Khám phá thế giới nghề nghiệp có liên quan đến Tin học.",
-
-        goal:
-        "Nhận biết một số lĩnh vực nghề nghiệp và vai trò của năng lực Tin học.",
-
-        content:
-        "Tìm hiểu sự đa dạng của nghề nghiệp liên quan đến công nghệ thông tin, dữ liệu, phần mềm và các lĩnh vực số.",
-
-        remember:
-        "Năng lực Tin học ngày càng có vai trò trong nhiều lĩnh vực nghề nghiệp khác nhau.",
-
-        challenge:
-        "Chọn một nghề liên quan đến Tin học mà em quan tâm và tìm hiểu yêu cầu của nghề đó."
+        title: "Bài 17. Tin học và thế giới nghề nghiệp",
+        intro: "Khám phá thế giới nghề nghiệp liên quan đến Tin học.",
+        goal: "Nhận biết một số lĩnh vực nghề nghiệp và vai trò của năng lực Tin học.",
+        content: "Tìm hiểu các nghề liên quan đến công nghệ thông tin, dữ liệu, phần mềm và lĩnh vực số.",
+        remember: "Năng lực Tin học ngày càng có vai trò trong nhiều nghề nghiệp.",
+        challenge: "Chọn một nghề liên quan đến Tin học và tìm hiểu yêu cầu của nghề."
     }
 
 };
 
 
-/* ==========================================
-   QUẢN LÝ MÀN HÌNH
-=========================================== */
+/* =====================================================
+   DANH SÁCH ID TRANG
+===================================================== */
 
-const sections = [
-
-    "homeSection",
-    "lessonSection",
-    "practiceSection",
-    "pythonSection",
-    "aiSection",
-    "teacherSection"
-
+const pages = [
+    "homePage",
+    "lessonsPage",
+    "practicePage",
+    "pythonPage",
+    "aiPage",
+    "teacherPage"
 ];
 
 
-function hideAllSections() {
+/* =====================================================
+   BIẾN BÀI HIỆN TẠI
+===================================================== */
 
-    sections.forEach(function(id) {
+let currentLesson = "";
 
-        document.getElementById(id)
-            .style.display = "none";
+
+/* =====================================================
+   ẨN TẤT CẢ TRANG
+===================================================== */
+
+function hidePages() {
+
+    pages.forEach(function(id) {
+
+        const page =
+            document.getElementById(id);
+
+        if (page) {
+
+            page.classList.remove("active");
+
+        }
 
     });
 
 }
 
 
-function showHome() {
+/* =====================================================
+   CUỘN ĐẦU TRANG
+===================================================== */
 
-    hideAllSections();
+function scrollTopPage() {
 
-    document.getElementById("homeSection")
-        .style.display = "block";
-
-    window.scrollTo(0,0);
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
 }
 
 
-function showLessons() {
+/* =====================================================
+   TRANG CHỦ
+===================================================== */
 
-    hideAllSections();
+function goHome(push = true) {
 
-    document.getElementById("lessonSection")
-        .style.display = "block";
+    hidePages();
+
+    document.getElementById("homePage")
+        .classList.add("active");
+
+    closeLessonDetail(false);
+
+    currentLesson = "";
+
+    if (push) {
+
+        history.pushState(
+            {},
+            "",
+            window.location.pathname
+        );
+
+    }
+
+    scrollTopPage();
+
+}
+
+
+/* =====================================================
+   TRANG BÀI HỌC
+===================================================== */
+
+function goLessons(push = true) {
+
+    hidePages();
+
+    document.getElementById("lessonsPage")
+        .classList.add("active");
+
+    closeLessonDetail(false);
 
     updateProgress();
 
-    window.scrollTo(0,0);
+    if (push) {
+
+        history.pushState(
+            {},
+            "",
+            window.location.pathname + "#bai-hoc"
+        );
+
+    }
+
+    scrollTopPage();
 
 }
 
 
-function showPractice() {
+/* =====================================================
+   LUYỆN TẬP
+===================================================== */
 
-    hideAllSections();
+function goPractice(push = true) {
 
-    document.getElementById("practiceSection")
-        .style.display = "block";
+    hidePages();
 
-    window.scrollTo(0,0);
+    document.getElementById("practicePage")
+        .classList.add("active");
 
-}
+    if (push) {
 
+        history.pushState(
+            {},
+            "",
+            window.location.pathname + "#luyen-tap"
+        );
 
-function showPython() {
+    }
 
-    hideAllSections();
-
-    document.getElementById("pythonSection")
-        .style.display = "block";
-
-    window.scrollTo(0,0);
-
-}
-
-
-function showAI() {
-
-    hideAllSections();
-
-    document.getElementById("aiSection")
-        .style.display = "block";
-
-    window.scrollTo(0,0);
+    scrollTopPage();
 
 }
 
 
-function showTeacher() {
+/* =====================================================
+   PYTHON
+===================================================== */
 
-    hideAllSections();
+function goPython(push = true) {
 
-    document.getElementById("teacherSection")
-        .style.display = "block";
+    hidePages();
 
-    window.scrollTo(0,0);
+    document.getElementById("pythonPage")
+        .classList.add("active");
+
+    if (push) {
+
+        history.pushState(
+            {},
+            "",
+            window.location.pathname + "#python"
+        );
+
+    }
+
+    scrollTopPage();
 
 }
 
 
-/* ==========================================
+/* =====================================================
+   AI
+===================================================== */
+
+function goAI(push = true) {
+
+    hidePages();
+
+    document.getElementById("aiPage")
+        .classList.add("active");
+
+    if (push) {
+
+        history.pushState(
+            {},
+            "",
+            window.location.pathname + "#ai"
+        );
+
+    }
+
+    scrollTopPage();
+
+}
+
+
+/* =====================================================
+   GÓC GIÁO VIÊN
+===================================================== */
+
+function goTeacher(push = true) {
+
+    hidePages();
+
+    document.getElementById("teacherPage")
+        .classList.add("active");
+
+    if (push) {
+
+        history.pushState(
+            {},
+            "",
+            window.location.pathname + "#giao-vien"
+        );
+
+    }
+
+    scrollTopPage();
+
+}
+
+
+/* =====================================================
    MỞ BÀI HỌC
-=========================================== */
-
-let currentLesson = "";
-
+===================================================== */
 
 function openLesson(id) {
-
-    currentLesson = id;
 
     const lesson = lessons[id];
 
     if (!lesson) {
 
-        alert("Chưa có dữ liệu bài học.");
+        alert(
+            "Chưa có dữ liệu cho bài học này."
+        );
 
         return;
 
     }
 
+    currentLesson = id;
+
+    goLessons(false);
 
     document.getElementById("detailTitle")
         .innerText = lesson.title;
@@ -2984,66 +2767,88 @@ function openLesson(id) {
         .innerText = lesson.challenge;
 
 
-    document.getElementById("lessonDetail")
-        .style.display = "block";
+    const detail =
+        document.getElementById("lessonDetail");
+
+    detail.classList.add("active");
 
 
-    const completed =
-        getCompletedLessons();
-
-    const button =
-        document.getElementById("completeButton");
+    updateCompleteButton();
 
 
-    if (completed.includes(id)) {
-
-        button.innerText =
-            "✅ Đã hoàn thành";
-
-        button.className =
-            "btn-success";
-
-    }
-
-    else {
-
-        button.innerText =
-            "✅ Đánh dấu đã hoàn thành";
-
-        button.className =
-            "btn-success";
-
-    }
+    history.pushState(
+        {},
+        "",
+        window.location.pathname +
+        "#bai-" +
+        encodeURIComponent(id)
+    );
 
 
-    window.scrollTo({
+    setTimeout(function() {
 
-        top:
-        document.getElementById("lessonDetail")
-            .offsetTop - 20,
+        detail.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
 
-        behavior: "smooth"
-
-    });
+    }, 100);
 
 }
 
 
-/* ==========================================
+/* =====================================================
    ĐÓNG CHI TIẾT
-=========================================== */
+===================================================== */
 
-function closeLessonDetail() {
+function closeLessonDetail(updateHistory = true) {
 
-    document.getElementById("lessonDetail")
-        .style.display = "none";
+    const detail =
+        document.getElementById("lessonDetail");
+
+    if (detail) {
+
+        detail.classList.remove("active");
+
+    }
+
+    if (updateHistory) {
+
+        history.pushState(
+            {},
+            "",
+            window.location.pathname +
+            "#bai-hoc"
+        );
+
+    }
 
 }
 
 
-/* ==========================================
-   LƯU TIẾN ĐỘ
-=========================================== */
+/* =====================================================
+   QUAY LẠI DANH SÁCH
+===================================================== */
+
+function backToLessonList() {
+
+    closeLessonDetail(true);
+
+    updateProgress();
+
+    setTimeout(function() {
+
+        document.getElementById("searchInput")
+            .focus();
+
+    }, 100);
+
+}
+
+
+/* =====================================================
+   LẤY DANH SÁCH BÀI ĐÃ HOÀN THÀNH
+===================================================== */
 
 function getCompletedLessons() {
 
@@ -3062,9 +2867,7 @@ function getCompletedLessons() {
 
         return JSON.parse(data);
 
-    }
-
-    catch {
+    } catch {
 
         return [];
 
@@ -3073,6 +2876,10 @@ function getCompletedLessons() {
 }
 
 
+/* =====================================================
+   ĐÁNH DẤU HOÀN THÀNH
+===================================================== */
+
 function completeCurrentLesson() {
 
     if (!currentLesson) {
@@ -3080,7 +2887,6 @@ function completeCurrentLesson() {
         return;
 
     }
-
 
     let completed =
         getCompletedLessons();
@@ -3094,26 +2900,14 @@ function completeCurrentLesson() {
 
 
     localStorage.setItem(
-
         "tin9_completed_lessons",
-
         JSON.stringify(completed)
-
     );
 
 
+    updateCompleteButton();
+
     updateProgress();
-
-
-    const button =
-        document.getElementById("completeButton");
-
-
-    button.innerText =
-        "✅ Đã hoàn thành";
-
-    button.className =
-        "btn-success";
 
 
     alert(
@@ -3123,9 +2917,47 @@ function completeCurrentLesson() {
 }
 
 
-/* ==========================================
+/* =====================================================
+   CẬP NHẬT NÚT HOÀN THÀNH
+===================================================== */
+
+function updateCompleteButton() {
+
+    const button =
+        document.getElementById(
+            "completeButton"
+        );
+
+    if (!button) {
+
+        return;
+
+    }
+
+    const completed =
+        getCompletedLessons();
+
+
+    if (
+        completed.includes(currentLesson)
+    ) {
+
+        button.innerText =
+            "✅ Đã hoàn thành";
+
+    } else {
+
+        button.innerText =
+            "✅ Đánh dấu đã hoàn thành";
+
+    }
+
+}
+
+
+/* =====================================================
    CẬP NHẬT TIẾN ĐỘ
-=========================================== */
+===================================================== */
 
 function updateProgress() {
 
@@ -3141,43 +2973,83 @@ function updateProgress() {
         completed.length;
 
 
-    let percent =
-        Math.round(
-            count / total * 100
+    let percent = 0;
+
+
+    if (total > 0) {
+
+        percent =
+            Math.round(
+                count / total * 100
+            );
+
+    }
+
+
+    const countElement =
+        document.getElementById(
+            "completedCount"
+        );
+
+    const progressElement =
+        document.getElementById(
+            "progressValue"
+        );
+
+    const textElement =
+        document.getElementById(
+            "progressText"
         );
 
 
-    document.getElementById(
-        "completedCount"
-    ).innerText = count;
+    if (countElement) {
+
+        countElement.innerText =
+            count;
+
+    }
 
 
-    document.getElementById(
-        "progressValue"
-    ).style.width =
-        percent + "%";
+    if (progressElement) {
+
+        progressElement.style.width =
+            percent + "%";
+
+    }
 
 
-    document.getElementById(
-        "progressText"
-    ).innerText =
-        percent +
-        "% hoàn thành";
+    if (textElement) {
 
+        textElement.innerText =
+            percent +
+            "% hoàn thành";
+
+    }
 
 }
 
 
-/* ==========================================
-   TÌM KIẾM BÀI HỌC
-=========================================== */
+/* =====================================================
+   TÌM KIẾM
+===================================================== */
 
 function searchLessons() {
 
-    const keyword =
+    const input =
         document.getElementById(
             "searchInput"
-        ).value
+        );
+
+
+    if (!input) {
+
+        return;
+
+    }
+
+
+    const keyword =
+        input.value
         .toLowerCase()
         .trim();
 
@@ -3191,8 +3063,11 @@ function searchLessons() {
     lessonElements.forEach(function(item) {
 
         const text =
-            item
-            .getAttribute("data-search")
+            (
+                item.getAttribute(
+                    "data-search"
+                ) || ""
+            )
             .toLowerCase();
 
 
@@ -3204,9 +3079,7 @@ function searchLessons() {
             item.style.display =
                 "flex";
 
-        }
-
-        else {
+        } else {
 
             item.style.display =
                 "none";
@@ -3218,14 +3091,212 @@ function searchLessons() {
 }
 
 
-/* ==========================================
-   KHỞI ĐỘNG
-=========================================== */
+/* =====================================================
+   XỬ LÝ NÚT QUAY LẠI TRÌNH DUYỆT
+===================================================== */
 
-showHome();
+window.addEventListener(
+    "popstate",
+    function() {
 
-updateProgress();
+        loadFromHash();
 
+    }
+);
+
+
+/* =====================================================
+   ĐỌC ĐƯỜNG DẪN
+===================================================== */
+
+function loadFromHash() {
+
+    const hash =
+        window.location.hash
+        .replace("#", "");
+
+
+    if (
+        hash === "" ||
+        hash === "trang-chu"
+    ) {
+
+        goHome(false);
+
+        return;
+
+    }
+
+
+    if (hash === "bai-hoc") {
+
+        goLessons(false);
+
+        return;
+
+    }
+
+
+    if (hash === "luyen-tap") {
+
+        goPractice(false);
+
+        return;
+
+    }
+
+
+    if (hash === "python") {
+
+        goPython(false);
+
+        return;
+
+    }
+
+
+    if (hash === "ai") {
+
+        goAI(false);
+
+        return;
+
+    }
+
+
+    if (hash === "giao-vien") {
+
+        goTeacher(false);
+
+        return;
+
+    }
+
+
+    if (hash.startsWith("bai-")) {
+
+        const id =
+            decodeURIComponent(
+                hash.substring(4)
+            );
+
+        if (lessons[id]) {
+
+            openLessonWithoutHistory(id);
+
+            return;
+
+        }
+
+    }
+
+
+    goHome(false);
+
+}
+
+
+/* =====================================================
+   MỞ BÀI TỪ URL
+===================================================== */
+
+function openLessonWithoutHistory(id) {
+
+    const lesson =
+        lessons[id];
+
+
+    if (!lesson) {
+
+        goLessons(false);
+
+        return;
+
+    }
+
+
+    currentLesson = id;
+
+
+    hidePages();
+
+    document.getElementById(
+        "lessonsPage"
+    ).classList.add("active");
+
+
+    document.getElementById(
+        "detailTitle"
+    ).innerText =
+        lesson.title;
+
+
+    document.getElementById(
+        "detailIntro"
+    ).innerText =
+        lesson.intro;
+
+
+    document.getElementById(
+        "detailGoal"
+    ).innerText =
+        lesson.goal;
+
+
+    document.getElementById(
+        "detailContent"
+    ).innerText =
+        lesson.content;
+
+
+    document.getElementById(
+        "detailRemember"
+    ).innerText =
+        lesson.remember;
+
+
+    document.getElementById(
+        "detailChallenge"
+    ).innerText =
+        lesson.challenge;
+
+
+    document.getElementById(
+        "lessonDetail"
+    ).classList.add("active");
+
+
+    updateCompleteButton();
+
+
+    setTimeout(function() {
+
+        document.getElementById(
+            "lessonDetail"
+        ).scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }, 100);
+
+}
+
+
+/* =====================================================
+   KHỞI ĐỘNG WEBSITE
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        updateProgress();
+
+        loadFromHash();
+
+    }
+);
 
 </script>
 
