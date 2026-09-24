@@ -1,14 +1,75 @@
-const KEY = "tin9.v3";
+const KEY = "tin9.v4";
+const OLD_KEY = "tin9.v3";
 
-let S = JSON.parse(
-  localStorage.getItem(KEY) ||
-  '{"user":null,"done":[],"level":null,"history":[],"diagnostic":null}'
-);
+function loadState() {
 
-const save = () =>
-  localStorage.setItem(KEY, JSON.stringify(S));
+  const fallback = {
+    user: null,
+    done: [],
+    level: null,
+    history: [],
+    diagnostic: null,
+    essayResponses: []
+  };
 
-const $ = id => document.getElementById(id);
+  try {
+
+    const raw =
+      localStorage.getItem(KEY) ||
+      localStorage.getItem(OLD_KEY);
+
+    const parsed =
+      raw ? JSON.parse(raw) : {};
+
+    return {
+      ...fallback,
+      ...(parsed || {}),
+      done: Array.isArray(parsed?.done)
+        ? parsed.done
+        : [],
+      history: Array.isArray(parsed?.history)
+        ? parsed.history
+        : [],
+      essayResponses:
+        Array.isArray(parsed?.essayResponses)
+          ? parsed.essayResponses
+          : []
+    };
+
+  } catch (error) {
+
+    console.warn(
+      "Không đọc được dữ liệu cũ, hệ thống khởi tạo dữ liệu mới.",
+      error
+    );
+
+    return fallback;
+  }
+}
+
+let S = loadState();
+
+const save = () => {
+
+  try {
+
+    localStorage.setItem(
+      KEY,
+      JSON.stringify(S)
+    );
+
+  } catch (error) {
+
+    console.warn(
+      "Không thể lưu dữ liệu trên thiết bị.",
+      error
+    );
+
+  }
+};
+
+const $ = id =>
+  document.getElementById(id);
 
 /* =========================
    NHÁNH CHƯƠNG TRÌNH
@@ -415,7 +476,7 @@ function view(v) {
 
     $("userLabel").textContent =
       S.user
-        ? `${S.user.name}${S.user.className ? " • " + S.user.className : ""}`
+        ? `${S.user.name}${S.user.className ? " • " + S.user.className : ""} • ${S.user.role === "teacher" ? "Giáo viên" : "Học sinh"}`
         : "";
 
   }
@@ -814,11 +875,119 @@ function drawLessons() {
     }).join("");
 }
 
+function lessonText(id) {
+
+  const text = {
+
+    "1":
+      "Thế giới kĩ thuật số là môi trường trong đó dữ liệu và thông tin được tạo lập, lưu trữ, xử lí và trao đổi bằng công nghệ số. Công nghệ số tác động mạnh đến học tập, lao động, giao tiếp và đời sống.",
+
+    "2":
+      "Thông tin hỗ trợ con người xác định vấn đề, lựa chọn phương án và đưa ra quyết định. Khi giải quyết vấn đề cần xác định thông tin cần thiết, tìm kiếm, chọn lọc và sử dụng thông tin phù hợp.",
+
+    "3":
+      "Đánh giá chất lượng thông tin cần xem xét nguồn cung cấp, tác giả, thời điểm, mục đích, bằng chứng và mức độ phù hợp. Khi cần nên đối chiếu với các nguồn độc lập khác.",
+
+    "4":
+      "Việc sử dụng dịch vụ Internet cần tuân thủ pháp luật, tôn trọng quyền riêng tư, quyền tác giả, bản quyền và các quy định về sử dụng thông tin trong môi trường số.",
+
+    "5":
+      "Phần mềm mô phỏng cho phép mô hình hóa đối tượng hoặc quá trình trên máy tính để người học quan sát, thay đổi tham số và tìm hiểu kết quả.",
+
+    "6":
+      "Khai thác phần mềm mô phỏng cần xác định mục tiêu, lựa chọn các tham số phù hợp, tiến hành thao tác, quan sát kết quả và rút ra nhận xét.",
+
+    "7":
+      "Công cụ trực quan như sơ đồ, hình ảnh và biểu đồ giúp tổ chức và trình bày thông tin rõ ràng, hỗ trợ trao đổi và hợp tác.",
+
+    "8":
+      "Khi sử dụng công cụ trực quan cần lựa chọn hình thức phù hợp với dữ liệu và mục đích truyền đạt, đồng thời kiểm tra tính chính xác và dễ hiểu của sản phẩm.",
+
+    "9a":
+      "Xác thực dữ liệu giúp kiểm soát dữ liệu được nhập vào bảng tính, hạn chế sai sót và góp phần tạo dữ liệu thống nhất.",
+
+    "10a":
+      "Hàm COUNTIF dùng để đếm số ô trong một vùng dữ liệu thỏa mãn một điều kiện xác định.",
+
+    "11a":
+      "Hàm SUMIF dùng để tính tổng các giá trị thỏa mãn điều kiện trong dữ liệu.",
+
+    "12a":
+      "Hàm IF cho phép tạo kết quả khác nhau tùy theo điều kiện đúng hoặc sai.",
+
+    "13a":
+      "Khi hoàn thiện một bảng tính cần tổ chức dữ liệu rõ ràng, sử dụng công thức phù hợp, kiểm tra kết quả và trình bày để người dùng dễ theo dõi.",
+
+    "9b":
+      "Phần mềm làm video cung cấp các chức năng tổ chức hình ảnh, âm thanh, văn bản, hiệu ứng và các thành phần của sản phẩm video.",
+
+    "10b":
+      "Chuẩn bị dữ liệu và dựng video cần xác định kịch bản, thu thập tư liệu, tổ chức các cảnh và sắp xếp nội dung theo mục đích.",
+
+    "11b":
+      "Dựng video theo kịch bản là quá trình đưa hình ảnh, âm thanh, văn bản và các thành phần khác vào dòng thời gian theo trình tự đã thiết kế.",
+
+    "12b":
+      "Hoàn thành video cần kiểm tra nội dung, hình ảnh, âm thanh, thời lượng và sự phù hợp với kịch bản.",
+
+    "13b":
+      "Biên tập và xuất video là bước hoàn thiện sản phẩm, kiểm tra chất lượng và tạo tệp video phù hợp với mục đích sử dụng.",
+
+    "14":
+      "Giải quyết vấn đề với máy tính cần xác định vấn đề, phân tích yêu cầu, xây dựng phương án, thực hiện và kiểm tra kết quả.",
+
+    "15":
+      "Bài toán tin học cần xác định dữ liệu vào, dữ liệu ra và cách biến đổi dữ liệu từ Input thành Output.",
+
+    "16":
+      "Lập chương trình máy tính cần chuyển ý tưởng giải quyết vấn đề thành thuật toán và chương trình, sau đó chạy thử, kiểm tra và sửa lỗi.",
+
+    "17":
+      "Tin học mở ra nhiều nhóm nghề nghiệp. Người học cần phát triển năng lực sử dụng công nghệ, tư duy giải quyết vấn đề, giao tiếp và học tập liên tục."
+  };
+
+  return text[id] ||
+    "Nội dung bài học đang được cập nhật. Em hãy xem mục tiêu, thực hành và tự đánh giá để tiếp tục lộ trình.";
+
+}
+
+function complete(id) {
+
+  if (!id) return;
+
+  const exists =
+    T9.lessons.some(
+      lesson => String(lesson.id) === String(id)
+    );
+
+  if (!exists) return;
+
+  if (!Array.isArray(S.done))
+    S.done = [];
+
+  const index =
+    S.done.indexOf(id);
+
+  if (index >= 0) {
+
+    S.done.splice(index, 1);
+
+  } else {
+
+    S.done.push(id);
+
+  }
+
+  save();
+
+  openLesson(id);
+}
+
 function openLesson(id) {
 
   const l =
     T9.lessons.find(
-      x => x.id === id
+      x => String(x.id) === String(id)
     );
 
   if (!l) return;
@@ -1335,144 +1504,293 @@ function finishDiag() {
 
 function quiz() {
 
-  const available =
-    T9.lessons.filter(
-      l =>
-        T9.questions.some(
-          q => q.lesson === l.id
-        )
-    );
+  const total =
+    Array.isArray(T9.questions)
+      ? T9.questions.length
+      : 0;
+
+  const essays =
+    Array.isArray(T9.essayQuestions)
+      ? T9.essayQuestions.length
+      : 0;
 
   return `
 
   <div class="panel">
 
-    <h2>
-      📝 Khu vực luyện tập
-    </h2>
+    <div class="section-head">
 
-    <p class="muted">
+      <div>
 
-      Chọn bài có ngân hàng câu hỏi
-      để luyện tập và tự kiểm tra.
+        <h2>
+          📝 LUYỆN TẬP TIN HỌC 9
+        </h2>
 
-    </p>
+        <p class="muted">
+          Bài luyện tập tổng hợp giúp học sinh tự kiểm tra,
+          nhận phản hồi và điều chỉnh lộ trình học tập.
+        </p>
 
-    <select
-      id="quizSelect"
-      class="search">
+      </div>
 
-      <option value="">
-        -- Chọn bài luyện tập --
-      </option>
+    </div>
 
-      ${available.map(l => `
+    <div class="cards">
 
-        <option value="${l.id}">
+      <div class="card">
+        📝 Trắc nghiệm
+        <div class="num">
+          ${total}
+        </div>
+      </div>
 
-          ${l.code} –
-          ${l.title}
+      <div class="card">
+        ✍️ Tự luận
+        <div class="num">
+          ${essays}
+        </div>
+      </div>
 
-        </option>
+      <div class="card">
+        📚 Bài học
+        <div class="num">
+          ${lessonTotal()}
+        </div>
+      </div>
 
-      `).join("")}
+      <div class="card">
+        📊 Lượt làm
+        <div class="num">
+          ${S.history.length}
+        </div>
+      </div>
 
-    </select>
+    </div>
+
+    <div class="callout blue">
+
+      <b>
+        📌 Cấu trúc bài luyện tập
+      </b>
+
+      <p>
+        <b>Phần A:</b>
+        ${total} câu trắc nghiệm, hệ thống tự chấm.
+      </p>
+
+      <p>
+        <b>Phần B:</b>
+        ${essays} câu tự luận, lưu câu trả lời để giáo viên xem và đánh giá.
+      </p>
+
+    </div>
+
+    <div class="toolbar">
+
+      <button
+        class="btn primary"
+        onclick="startQuiz()">
+
+        🚀 Bắt đầu làm bài
+
+      </button>
+
+      <button
+        class="btn"
+        onclick="view('lessons')">
+
+        📚 Về bài học
+
+      </button>
+
+    </div>
 
     <div
       id="quizArea"
       style="margin-top:18px">
+
     </div>
 
   </div>
+
   `;
 }
 
-function startQuiz(id) {
-
-  id =
-    id ||
-    $("quizSelect")?.value;
-
-  if (!id) return;
+function startQuiz(sourceLessonId) {
 
   const qs =
-    T9.questions.filter(
-      q => q.lesson === id
-    );
+    Array.isArray(T9.questions)
+      ? T9.questions.slice(0, 20)
+      : [];
 
-  if (!qs.length) {
+  const essays =
+    Array.isArray(T9.essayQuestions)
+      ? T9.essayQuestions.slice(0, 3)
+      : [];
 
-    $("quizArea").innerHTML = `
+  if (qs.length < 20) {
+
+    const area = $("quizArea");
+
+    if (area) {
+
+      area.innerHTML = `
 
       <div class="callout orange">
 
-        ⚠️ Bài này chưa có ngân hàng
-        câu hỏi.
+        ⚠️ Ngân hàng câu hỏi chưa đủ 20 câu.
+        Hiện có ${qs.length} câu.
 
       </div>
-    `;
+      `;
+
+    }
 
     return;
   }
 
   window._quiz = {
-    id: id,
+
+    id: "tong-hop",
+
+    sourceLessonId:
+      sourceLessonId || null,
+
     qs: qs,
-    ans: []
+
+    essays: essays,
+
+    ans: [],
+
+    submitted: false
+
   };
 
-  $("quizArea").innerHTML = `
+  const source =
+    sourceLessonId
+      ? T9.lessons.find(
+          l => l.id === sourceLessonId
+        )
+      : null;
+
+  const sourceText =
+    source
+      ? `Luyện tập sau bài ${source.code} – ${source.title}. Bộ đề gồm 20 câu tổng hợp và 03 câu tự luận.`
+      : "Bộ đề tổng hợp toàn chương trình gồm 20 câu trắc nghiệm và 03 câu tự luận.";
+
+  const area = $("quizArea");
+
+  if (!area) return;
+
+  area.innerHTML = `
 
   <div class="callout blue">
 
     <b>
-      📌 Hướng dẫn
+      📌 Hướng dẫn làm bài
     </b>
 
     <p>
-      Đọc kỹ từng câu và chọn đáp án.
-      Sau khi hoàn thành hãy bấm
-      <b>Nộp bài</b>.
+      ${esc(sourceText)}
+    </p>
+
+    <p>
+      Mỗi câu trắc nghiệm có một đáp án đúng.
+      Em có thể chọn lại trước khi nộp.
     </p>
 
   </div>
 
-  ${qs.map((q, i) => `
+  <div class="panel">
 
-    <div class="quiz-q">
+    <h2>
+      📝 PHẦN A. 20 CÂU TRẮC NGHIỆM
+    </h2>
+
+    ${qs.map((q, i) => `
+
+      <div class="quiz-q">
+
+        <p>
+          <b>
+            Câu ${i + 1}.
+          </b>
+
+          ${esc(q.text)}
+        </p>
+
+        ${q.opts.map((o, j) => `
+
+          <button
+            type="button"
+            class="option"
+            data-quiz-q="${i}"
+            data-quiz-a="${j}"
+            onclick="qans(${i},${j},this)">
+
+            ${String.fromCharCode(65 + j)}.
+            ${esc(o)}
+
+          </button>
+
+        `).join("")}
+
+      </div>
+
+    `).join("")}
+
+  </div>
+
+  <div class="panel">
+
+    <h2>
+      ✍️ PHẦN B. 03 CÂU TỰ LUẬN
+    </h2>
+
+    <div class="callout orange">
 
       <b>
-        Câu ${i + 1}.
-        ${q.text}
+        📌 Lưu ý:
       </b>
 
-      ${q.opts.map((o, j) => `
-
-        <button
-          class="option"
-          onclick="
-            qans(
-              ${i},
-              ${j},
-              this
-            )
-          ">
-
-          ${String.fromCharCode(65 + j)}.
-          ${o}
-
-        </button>
-
-      `).join("")}
+      <span>
+        Câu tự luận không tự chấm nội dung.
+        Câu trả lời được lưu trên thiết bị để giáo viên xem và đánh giá.
+      </span>
 
     </div>
 
-  `).join("")}
+    ${essays.map((q, i) => `
+
+      <div class="quiz-q">
+
+        <p>
+          <b>
+            Câu tự luận ${i + 1}.
+          </b>
+        </p>
+
+        <p>
+          ${esc(q.text)}
+        </p>
+
+        <textarea
+          id="essay_${i}"
+          rows="7"
+          aria-label="Câu tự luận ${i + 1}"
+          style="width:100%;box-sizing:border-box;padding:14px;border-radius:10px;border:1px solid #d6dce5;font-size:16px;resize:vertical;"
+          placeholder="Nhập câu trả lời của em..."></textarea>
+
+      </div>
+
+    `).join("")}
+
+  </div>
 
   <div class="toolbar">
 
     <button
+      type="button"
       class="btn primary"
       onclick="submitQuiz()">
 
@@ -1481,6 +1799,7 @@ function startQuiz(id) {
     </button>
 
     <button
+      type="button"
       class="btn"
       onclick="view('lessons')">
 
@@ -1491,36 +1810,46 @@ function startQuiz(id) {
   </div>
 
   <div id="quizResult"></div>
+
   `;
+
+  window.scrollTo(0, 0);
 }
 
 function qans(i, j, button) {
 
-  if (!window._quiz)
-    return;
+  const quizState =
+    window._quiz;
 
-  window._quiz.ans[i] = j;
+  if (
+    !quizState ||
+    quizState.submitted
+  ) return;
+
+  quizState.ans[i] = j;
 
   document
     .querySelectorAll(
-      `[onclick^="qans(${i},"]`
+      `[data-quiz-q="${i}"]`
     )
-    .forEach(x =>
-      x.classList.remove(
-        "selected"
-      )
+    .forEach(
+      element =>
+        element.classList.remove(
+          "selected"
+        )
     );
 
-  button.classList.add(
-    "selected"
-  );
+  if (button)
+    button.classList.add("selected");
 }
 
 function submitQuiz() {
 
-  const x = window._quiz;
+  const x =
+    window._quiz;
 
-  if (!x) return;
+  if (!x || x.submitted)
+    return;
 
   const unanswered =
     x.qs.filter(
@@ -1532,7 +1861,7 @@ function submitQuiz() {
 
     const ok =
       confirm(
-        `Bạn còn ${unanswered} câu chưa trả lời. Vẫn nộp bài?`
+        `Bạn còn ${unanswered} câu trắc nghiệm chưa trả lời. Vẫn nộp bài?`
       );
 
     if (!ok) return;
@@ -1540,8 +1869,8 @@ function submitQuiz() {
 
   const score =
     x.qs.reduce(
-      (a, q, i) =>
-        a +
+      (total, q, i) =>
+        total +
         (
           x.ans[i] === q.ans
             ? 1
@@ -1555,45 +1884,78 @@ function submitQuiz() {
       score / x.qs.length * 100
     );
 
-  x.qs.forEach((q, i) => {
+  x.submitted = true;
 
-    document
-      .querySelectorAll(
-        `[onclick^="qans(${i},"]`
-      )
-      .forEach((button, j) => {
+  x.qs.forEach(
+    (q, i) => {
 
-        button.disabled = true;
+      document
+        .querySelectorAll(
+          `[data-quiz-q="${i}"]`
+        )
+        .forEach(
+          (button, j) => {
 
-        if (j === q.ans) {
+            button.disabled = true;
 
-          button.classList.add(
-            "correct"
-          );
+            if (j === q.ans)
+              button.classList.add(
+                "correct"
+              );
 
-        }
+            if (
+              j === x.ans[i] &&
+              x.ans[i] !== q.ans
+            )
+              button.classList.add(
+                "wrong"
+              );
 
-        if (
-          j === x.ans[i] &&
-          x.ans[i] !== q.ans
-        ) {
+          }
+        );
 
-          button.classList.add(
-            "wrong"
-          );
+    }
+  );
 
-        }
-
-      });
-
-  });
-
-  let level =
+  const level =
     percent >= 80
       ? "advanced"
       : percent >= 50
-      ? "standard"
-      : "support";
+        ? "standard"
+        : "support";
+
+  const essayAnswers =
+    (x.essays || []).map(
+      (q, i) => ({
+        id: q.id,
+        question: q.text,
+        answer:
+          $(`essay_${i}`)?.value.trim() || ""
+      })
+    );
+
+  if (!Array.isArray(S.essayResponses))
+    S.essayResponses = [];
+
+  S.essayResponses.push({
+
+    time:
+      new Date()
+        .toLocaleString("vi-VN"),
+
+    user:
+      S.user?.name || "",
+
+    className:
+      S.user?.className || "",
+
+    answers:
+      essayAnswers
+
+  });
+
+  if (!Array.isArray(S.history))
+    S.history = [];
 
   S.history.push({
 
@@ -1601,17 +1963,27 @@ function submitQuiz() {
       new Date()
         .toLocaleString("vi-VN"),
 
-    lesson: x.id,
+    lesson:
+      x.sourceLessonId || "tong-hop",
 
-    score: score,
+    score:
+      score,
 
-    total: x.qs.length,
+    total:
+      x.qs.length,
 
-    percent: percent,
+    percent:
+      percent,
 
-    level: level
+    level:
+      level,
+
+    essayCount:
+      essayAnswers.length
 
   });
+
+  S.level = level;
 
   save();
 
@@ -1620,7 +1992,7 @@ function submitQuiz() {
   if (percent >= 80) {
 
     message =
-      "🌟 Em đã nắm khá tốt nội dung. Hãy thử vận dụng và mở rộng kiến thức.";
+      "🌟 Em đã nắm khá tốt kiến thức. Hãy tiếp tục vận dụng và mở rộng.";
 
   } else if (percent >= 50) {
 
@@ -1634,7 +2006,12 @@ function submitQuiz() {
 
   }
 
-  $("quizResult").innerHTML = `
+  const result =
+    $("quizResult");
+
+  if (!result) return;
+
+  result.innerHTML = `
 
   <div class="callout green">
 
@@ -1645,7 +2022,7 @@ function submitQuiz() {
     <div
       style="
         font-size:30px;
-        font-weight:bold;
+        font-weight:850;
       ">
 
       ${score}/${x.qs.length}
@@ -1653,21 +2030,19 @@ function submitQuiz() {
     </div>
 
     <p>
-      Kết quả:
+      Kết quả trắc nghiệm:
       <b>${percent}%</b>
     </p>
 
     <p>
       Mức độ:
-
       <b>
         ${
           T9.levels.find(
-            x => x.id === level
-          )?.name
+            item => item.id === level
+          )?.name || ""
         }
       </b>
-
     </p>
 
     <p>
@@ -1676,17 +2051,38 @@ function submitQuiz() {
 
   </div>
 
+  <div class="callout blue">
+
+    <h3>
+      ✍️ Phần tự luận
+    </h3>
+
+    <p>
+      Đã lưu
+      <b>${essayAnswers.length}</b>
+      câu trả lời tự luận trên thiết bị.
+    </p>
+
+    <p>
+      Giáo viên có thể xem trong
+      <b>Góc giáo viên</b>.
+    </p>
+
+  </div>
+
   <div class="toolbar">
 
     <button
+      type="button"
       class="btn primary"
-      onclick="startQuiz('${x.id}')">
+      onclick="startQuiz()">
 
       🔄 Làm lại
 
     </button>
 
     <button
+      type="button"
       class="btn"
       onclick="view('progress')">
 
@@ -1694,8 +2090,23 @@ function submitQuiz() {
 
     </button>
 
+    <button
+      type="button"
+      class="btn"
+      onclick="view('lessons')">
+
+      📚 Về bài học
+
+    </button>
+
   </div>
+
   `;
+
+  result.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
 }
 
 /* =========================
@@ -1968,6 +2379,16 @@ function teacher() {
   const done =
     curriculumDone();
 
+  const essays =
+    Array.isArray(S.essayResponses)
+      ? S.essayResponses
+      : [];
+
+  const recent =
+    Array.isArray(S.history)
+      ? S.history.slice(-10).reverse()
+      : [];
+
   return `
 
   <div class="panel">
@@ -1977,52 +2398,37 @@ function teacher() {
     </h2>
 
     <p class="muted">
-
-      Dashboard theo dõi tiến độ
-      học tập trên thiết bị.
-
+      Khu vực theo dõi dữ liệu học tập được lưu trên thiết bị hiện tại.
     </p>
 
     <div class="cards">
 
       <div class="card">
-
         📚 Bài học
-
         <div class="num">
           ${lessonTotal()}
         </div>
-
       </div>
 
       <div class="card">
-
         ✅ Hoàn thành
-
         <div class="num">
           ${done.length}
         </div>
-
       </div>
 
       <div class="card">
-
         📝 Lượt luyện
-
         <div class="num">
           ${S.history.length}
         </div>
-
       </div>
 
       <div class="card">
-
         📊 Tiến độ
-
         <div class="num">
           ${progressPercent()}%
         </div>
-
       </div>
 
     </div>
@@ -2030,42 +2436,174 @@ function teacher() {
     <div class="callout blue">
 
       <b>
-        Phân nhóm học tập
+        👤 Người học hiện tại
       </b>
 
       <p>
-        🟢 Khá – giỏi:
-        có khả năng vận dụng và mở rộng.
-      </p>
-
-      <p>
-        🟡 Đạt chuẩn:
-        đạt yêu cầu cơ bản.
-      </p>
-
-      <p>
-        🔴 Cần hỗ trợ:
-        cần củng cố và hướng dẫn thêm.
-      </p>
-
-    </div>
-
-    <div class="callout orange">
-
-      <b>
-        Giai đoạn tiếp theo
-      </b>
-
-      <p>
-        Có thể phát triển thành dashboard
-        lớp học, danh sách học sinh,
-        thống kê điểm và báo cáo giáo viên
-        khi có hệ thống tài khoản và máy chủ.
+        ${
+          S.user
+            ? `${esc(S.user.name)}${S.user.className ? " – Lớp " + esc(S.user.className) : ""}`
+            : "Chưa đăng nhập"
+        }
       </p>
 
     </div>
 
   </div>
+
+  <div class="panel">
+
+    <h2>
+      📈 Lịch sử luyện tập gần đây
+    </h2>
+
+    ${
+      recent.length
+      ? `
+      <table class="table">
+
+        <thead>
+
+          <tr>
+            <th>Thời gian</th>
+            <th>Nội dung</th>
+            <th>Kết quả</th>
+            <th>Mức</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          ${recent.map(item => `
+
+            <tr>
+
+              <td>
+                ${esc(item.time || "")}
+              </td>
+
+              <td>
+                ${
+                  item.lesson === "tong-hop"
+                    ? "Bộ đề tổng hợp"
+                    : `Bài ${esc(item.lesson || "")}`
+                }
+              </td>
+
+              <td>
+                ${item.score ?? 0}/${item.total ?? 0}
+                (${item.percent ?? 0}%)
+              </td>
+
+              <td>
+                ${
+                  T9.levels.find(
+                    x => x.id === item.level
+                  )?.name || ""
+                }
+              </td>
+
+            </tr>
+
+          `).join("")}
+
+        </tbody>
+
+      </table>
+      `
+      : `
+      <div class="callout orange">
+        Chưa có lượt luyện tập.
+      </div>
+      `
+    }
+
+  </div>
+
+  <div class="panel">
+
+    <h2>
+      ✍️ Bài tự luận đã lưu
+    </h2>
+
+    ${
+      essays.length
+      ? essays.slice().reverse().map((record, ri) => `
+
+        <div class="callout blue">
+
+          <b>
+            ${
+              esc(record.user || "Học sinh")
+            }
+            ${
+              record.className
+                ? " – Lớp " + esc(record.className)
+                : ""
+            }
+          </b>
+
+          <div class="muted">
+            ${esc(record.time || "")}
+          </div>
+
+          ${
+            (record.answers || []).map((answer, i) => `
+
+              <div
+                class="quiz-q">
+
+                <p>
+                  <b>
+                    Câu tự luận ${i + 1}
+                  </b>
+                </p>
+
+                <p>
+                  ${esc(answer.question || "")}
+                </p>
+
+                <div class="callout green">
+
+                  ${
+                    answer.answer
+                      ? esc(answer.answer)
+                      : "Học sinh chưa nhập câu trả lời."
+                  }
+
+                </div>
+
+              </div>
+
+            `).join("")
+          }
+
+        </div>
+
+      `).join("")
+      : `
+      <div class="callout orange">
+        Chưa có câu trả lời tự luận nào được lưu trên thiết bị này.
+      </div>
+      `
+    }
+
+  </div>
+
+  <div class="callout orange">
+
+    <b>
+      🔐 Lưu ý về dữ liệu
+    </b>
+
+    <p>
+      Phiên bản hiện tại lưu dữ liệu bằng localStorage trên thiết bị.
+      Dữ liệu không tự động đồng bộ giữa nhiều máy hoặc nhiều học sinh.
+    </p>
+
+  </div>
+
   `;
 }
 
@@ -2128,14 +2666,12 @@ function bind(v) {
 
   if (v === "lessons") {
 
-    if ($("search")) {
-
+    if ($("search"))
       $("search").oninput =
         drawLessons;
 
-    }
-
     drawLessons();
+
   }
 
   if (v === "diagnostic") {
@@ -2144,26 +2680,49 @@ function bind(v) {
 
   }
 
-  if (v === "quiz") {
+  if (v === "ai") {
 
-    if ($("quizSelect")) {
+    const messages =
+      $("messages");
 
-      $("quizSelect").onchange =
-        () => startQuiz();
+    if (
+      messages &&
+      !messages.children.length
+    ) {
+
+      say(
+        "👋 Chào em! Hãy nêu bài đang học và phần chưa hiểu. Trợ lý sẽ gợi ý từng bước.",
+        "bot"
+      );
 
     }
 
   }
 
-  if (v === "ai") {
-
-    say(
-      "👋 Chào em! Hãy nêu bài đang học và phần chưa hiểu. Trợ lý sẽ gợi ý từng bước.",
-      "bot"
-    );
-
-  }
 }
+
+/* =========================
+   KẾT NỐI HÀM GIAO DIỆN
+========================= */
+
+window.view = view;
+window.openLesson = openLesson;
+window.complete = complete;
+window.setBranch = setBranch;
+
+window.startQuiz = startQuiz;
+window.qans = qans;
+window.submitQuiz = submitQuiz;
+
+window.diagAns = diagAns;
+window.finishDiag = finishDiag;
+
+window.ask = ask;
+window.say = say;
+
+window.enter = enter;
+window.logout = logout;
+window.toggleClassField = toggleClassField;
 
 /* =========================
    KHỞI ĐỘNG
